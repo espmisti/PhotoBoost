@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">PhotoSearch</string>
+    <string name="app_name">Found Face</string>
+    <string name="title_activity_browser_result">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
