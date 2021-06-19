@@ -12,10 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".LoadingActivity"></activity>
-        <activity
-            android:name=".BrowserResultActivity"
-            android:label="@string/title_activity_browser_result" />
-        <activity android:name=".MenuActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
