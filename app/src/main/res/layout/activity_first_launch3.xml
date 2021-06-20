@@ -4,6 +4,119 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FirstLaunch3Activity">
+    android:background="@drawable/bg_first"
+    tools:context=".FirstLaunch2Activity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/fl2_sliderActive"
+                    android:layout_width="80dp"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="48dp"
+                    android:layout_marginEnd="84dp"
+                    app:layout_constraintEnd_toEndOf="@+id/fl2_imgMain"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/slides" />
+
+                <ImageView
+                    android:id="@+id/fl2_slider2"
+                    android:layout_width="80dp"
+                    android:layout_height="3dp"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/fl2_sliderActive"
+                    app:layout_constraintStart_toEndOf="@+id/fl2_sliderActive"
+                    app:layout_constraintTop_toTopOf="@+id/fl2_sliderActive"
+                    app:srcCompat="@drawable/slides_hover" />
+
+                <TextView
+                    android:id="@+id/fl2_text2"
+                    android:layout_width="242dp"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/sfpro_regular"
+                    android:text="Отмена подписки доступна в любой момент"
+                    android:textAlignment="center"
+                    android:textColor="#5266B9"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/fl2_text1"
+                    app:layout_constraintStart_toStartOf="@+id/fl2_text1"
+                    app:layout_constraintTop_toBottomOf="@+id/fl2_text1" />
+
+                <ImageView
+                    android:id="@+id/fl2_imgMain"
+                    android:layout_width="253dp"
+                    android:layout_height="162dp"
+                    android:layout_marginBottom="32dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.305"
+                    app:srcCompat="@drawable/test_free_people" />
+
+                <ImageView
+                    android:id="@+id/fl2_slider1"
+                    android:layout_width="80dp"
+                    android:layout_height="3dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/fl2_sliderActive"
+                    app:layout_constraintEnd_toStartOf="@+id/fl2_sliderActive"
+                    app:layout_constraintTop_toTopOf="@+id/fl2_sliderActive"
+                    app:srcCompat="@drawable/slides" />
+
+                <Button
+                    android:id="@+id/fl2_button_next2"
+                    style="@android:style/Widget.Button"
+                    android:layout_width="284dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/button"
+                    android:fontFamily="@font/sfpro_bold"
+                    android:text="Хочу попробовать!"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp"
+                    tools:layout_editor_absoluteX="63dp"
+                    tools:layout_editor_absoluteY="399dp" />
+
+                <TextView
+                    android:id="@+id/fl2_text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/sfpro_bold"
+                    android:text="Попробуй бесплатно"
+                    android:textColor="#2E4085"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="@+id/fl2_imgMain"
+                    app:layout_constraintHorizontal_bias="0.489"
+                    app:layout_constraintStart_toStartOf="@+id/fl2_imgMain"
+                    app:layout_constraintTop_toBottomOf="@+id/fl2_imgMain" />
+
+                <ImageView
+                    android:id="@+id/fl2_buttonClose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintHorizontal_bias="0.42"
+                    app:layout_constraintBottom_toBottomOf="@+id/fl2_slider1"
+                    app:layout_constraintEnd_toStartOf="@+id/fl2_slider1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/fl2_slider1"
+                    app:srcCompat="@drawable/ic_close" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
