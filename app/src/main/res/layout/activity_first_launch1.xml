@@ -48,8 +48,8 @@
     <Button
         android:id="@+id/fl_button_next1"
         style="@android:style/Widget.Button"
-        android:layout_width="284dp"
-        android:layout_height="60dp"
+        android:layout_width="259dp"
+        android:layout_height="57dp"
         android:layout_marginTop="28dp"
         android:background="@drawable/button"
         android:fontFamily="@font/sfpro_bold"
@@ -61,34 +61,34 @@
         app:layout_constraintTop_toBottomOf="@+id/fl_text2" />
 
     <ImageView
-        android:id="@+id/fl_sliderActive"
-        android:layout_width="80dp"
+        android:id="@+id/slider_active"
+        android:layout_width="70dp"
         android:layout_height="3dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/fl_slider1"
-        app:layout_constraintEnd_toStartOf="@+id/fl_slider1"
-        app:layout_constraintTop_toTopOf="@+id/fl_slider1"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/slider1"
+        app:layout_constraintEnd_toStartOf="@+id/slider1"
+        app:layout_constraintTop_toTopOf="@+id/slider1"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/slides_hover" />
 
     <ImageView
-        android:id="@+id/fl_slider1"
-        android:layout_width="80dp"
+        android:id="@+id/slider1"
+        android:layout_width="70dp"
         android:layout_height="3dp"
-        android:layout_marginTop="56dp"
+        app:layout_constraintBottom_toTopOf="@+id/fl_imgMain"
         app:layout_constraintEnd_toEndOf="@+id/fl_imgMain"
         app:layout_constraintStart_toStartOf="@+id/fl_imgMain"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/slides" />
 
     <ImageView
-        android:id="@+id/fl_slider2"
-        android:layout_width="80dp"
+        android:id="@+id/slider2"
+        android:layout_width="70dp"
         android:layout_height="3dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/fl_slider1"
-        app:layout_constraintStart_toEndOf="@+id/fl_slider1"
-        app:layout_constraintTop_toTopOf="@+id/fl_slider1"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/slider1"
+        app:layout_constraintStart_toEndOf="@+id/slider1"
+        app:layout_constraintTop_toTopOf="@+id/slider1"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/slides" />
 
@@ -96,10 +96,10 @@
         android:id="@+id/fl_buttonClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/fl_sliderActive"
-        app:layout_constraintEnd_toStartOf="@+id/fl_sliderActive"
-        app:layout_constraintHorizontal_bias="0.42"
+        app:layout_constraintBottom_toBottomOf="@+id/slider_active"
+        app:layout_constraintEnd_toStartOf="@+id/slider_active"
+        app:layout_constraintHorizontal_bias="0.563"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fl_sliderActive"
+        app:layout_constraintTop_toTopOf="@+id/slider_active"
         app:srcCompat="@drawable/ic_close" />
 </androidx.constraintlayout.widget.ConstraintLayout>

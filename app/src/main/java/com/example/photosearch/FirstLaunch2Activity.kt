@@ -15,6 +15,6 @@ class FirstLaunch2Activity : AppCompatActivity() {
             finish()
             finish()
         }
-        (findViewById<Button>(R.id.fl2_button_next2)).setOnClickListener { startActivity(Intent(this, FirstLaunch3Activity::class.java)) }
+        (findViewById<Button>(R.id.fl2_button_next1)).setOnClickListener { startActivity(Intent(this, FirstLaunch3Activity::class.java)) }
     }
 }

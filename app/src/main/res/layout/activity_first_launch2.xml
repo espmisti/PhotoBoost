@@ -8,10 +8,10 @@
     tools:context=".FirstLaunch2Activity">
 
     <Button
-        android:id="@+id/fl2_button_next2"
+        android:id="@+id/fl2_button_next1"
         style="@android:style/Widget.Button"
-        android:layout_width="284dp"
-        android:layout_height="60dp"
+        android:layout_width="259dp"
+        android:layout_height="57dp"
         android:layout_marginTop="28dp"
         android:background="@drawable/button"
         android:fontFamily="@font/sfpro_bold"
@@ -32,12 +32,12 @@
         android:textAlignment="center"
         android:textColor="#5266B9"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/fl2_text1"
-        app:layout_constraintStart_toStartOf="@+id/fl2_text1"
-        app:layout_constraintTop_toBottomOf="@+id/fl2_text1" />
+        app:layout_constraintEnd_toEndOf="@+id/fl3_text1"
+        app:layout_constraintStart_toStartOf="@+id/fl3_text1"
+        app:layout_constraintTop_toBottomOf="@+id/fl3_text1" />
 
     <TextView
-        android:id="@+id/fl2_text1"
+        android:id="@+id/fl3_text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/sfpro_bold"
@@ -64,46 +64,44 @@
         android:id="@+id/fl2_buttonClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/fl2_slider1"
-        app:layout_constraintEnd_toStartOf="@+id/fl2_slider1"
-        app:layout_constraintHorizontal_bias="0.42"
+        app:layout_constraintBottom_toBottomOf="@+id/slider1"
+        app:layout_constraintEnd_toStartOf="@+id/slider1"
+        app:layout_constraintHorizontal_bias="0.563"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fl2_slider1"
+        app:layout_constraintTop_toTopOf="@+id/slider1"
         app:srcCompat="@drawable/ic_close" />
 
     <ImageView
-        android:id="@+id/fl2_slider1"
-        android:layout_width="80dp"
+        android:id="@+id/slider1"
+        android:layout_width="70dp"
         android:layout_height="3dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/fl2_sliderActive"
-        app:layout_constraintEnd_toStartOf="@+id/fl2_sliderActive"
-        app:layout_constraintTop_toTopOf="@+id/fl2_sliderActive"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/slider_active"
+        app:layout_constraintEnd_toStartOf="@+id/slider_active"
+        app:layout_constraintTop_toTopOf="@+id/slider_active"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/slides" />
 
     <ImageView
-        android:id="@+id/fl2_slider2"
-        android:layout_width="80dp"
+        android:id="@+id/slider2"
+        android:layout_width="70dp"
         android:layout_height="3dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/fl2_sliderActive"
-        app:layout_constraintStart_toEndOf="@+id/fl2_sliderActive"
-        app:layout_constraintTop_toTopOf="@+id/fl2_sliderActive"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/slider_active"
+        app:layout_constraintStart_toEndOf="@+id/slider_active"
+        app:layout_constraintTop_toTopOf="@+id/slider_active"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/slides" />
 
     <ImageView
-        android:id="@+id/fl2_sliderActive"
-        android:layout_width="80dp"
+        android:id="@+id/slider_active"
+        android:layout_width="70dp"
         android:layout_height="3dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="96dp"
-        android:layout_marginBottom="36dp"
         app:layout_constraintBottom_toTopOf="@+id/fl2_imgMain"
         app:layout_constraintEnd_toEndOf="@+id/fl2_imgMain"
-        app:layout_constraintStart_toEndOf="@+id/fl_slider1"
+        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintStart_toStartOf="@+id/fl2_imgMain"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/slides_hover" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_first"
+    android:background="@drawable/bg_main"
     tools:context=".FirstLaunch2Activity">
 
     <ScrollView
@@ -21,88 +21,112 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_bg_main2">
 
                 <ImageView
-                    android:id="@+id/fl2_sliderActive"
-                    android:layout_width="80dp"
+                    android:id="@+id/slider_active"
+                    android:layout_width="70dp"
                     android:layout_height="3dp"
                     android:layout_marginTop="48dp"
-                    android:layout_marginEnd="84dp"
+                    app:layout_constraintBottom_toTopOf="@+id/fl2_imgMain"
                     app:layout_constraintEnd_toEndOf="@+id/fl2_imgMain"
+                    app:layout_constraintHorizontal_bias="0.496"
+                    app:layout_constraintStart_toStartOf="@+id/fl2_imgMain"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
                     app:srcCompat="@drawable/slides" />
 
                 <ImageView
-                    android:id="@+id/fl2_slider2"
-                    android:layout_width="80dp"
+                    android:id="@+id/slider2"
+                    android:layout_width="70dp"
                     android:layout_height="3dp"
-                    android:layout_marginStart="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/fl2_sliderActive"
-                    app:layout_constraintStart_toEndOf="@+id/fl2_sliderActive"
-                    app:layout_constraintTop_toTopOf="@+id/fl2_sliderActive"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/slider_active"
+                    app:layout_constraintStart_toEndOf="@+id/slider_active"
+                    app:layout_constraintTop_toTopOf="@+id/slider_active"
+                    app:layout_constraintVertical_bias="0.0"
                     app:srcCompat="@drawable/slides_hover" />
 
                 <TextView
                     android:id="@+id/fl2_text2"
                     android:layout_width="242dp"
-                    android:layout_height="46dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:fontFamily="@font/sfpro_regular"
                     android:text="Отмена подписки доступна в любой момент"
                     android:textAlignment="center"
                     android:textColor="#5266B9"
                     android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="@+id/fl2_text1"
-                    app:layout_constraintStart_toStartOf="@+id/fl2_text1"
-                    app:layout_constraintTop_toBottomOf="@+id/fl2_text1" />
+                    app:layout_constraintEnd_toEndOf="@+id/fl3_text1"
+                    app:layout_constraintHorizontal_bias="0.473"
+                    app:layout_constraintStart_toStartOf="@+id/fl3_text1"
+                    app:layout_constraintTop_toBottomOf="@+id/fl3_text1" />
+
+                <TextView
+                    android:id="@+id/fl2_text"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/sfpro_regular"
+                    android:text="Затем 490₽/месяц после пробного периода. Если вы не желаете приоретать платную версию, то вам необходимо отвенить пробную подписку за 24ч до ее окончания. Если в течении 3 дней подписка не была отменена, по истечению пробного периода с вашего аккаунта будет взиматься ежемесячный платеж в размере 490₽. Ваша подписка возобновляется автоматически, пока вы её не отключите как минимум за 24 часа до истечения текущей подписки. Оплата за возобновление в зависимости от выбранной при подключении длительности подписки будет снята с вашего счета в течении 24 часов до окончания текущей подписки.  Подписка «Премиум-подписка» является опциональной и дает вам безлимитные полноценные проверки на выбранный период времени. Подписка является авто-возобновляемой. Оплата будет снята с вашего счета после того, как вы подтвердите покупку. В зависимости от выбранной длительности подписки, ваша подписка будет обновляться: ежемесячно по цене 490₽ за месяц; каждые 6 месяцев по цене 21190₽ за 6 месяцев. Пробная подписка предоставляется бесплатно в течение 3 дней с момента её подключения. После приобретения подписки вы можете управлять ею и выключить автоматическое возобновление в настройках вашего аккаунта Google Play в любой момент. Вы не сможете отменить действие текущей подписки, если она уже активирована."
+                    android:textAlignment="center"
+                    android:textColor="#7F92DF"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="@+id/fl3_button_next1"
+                    app:layout_constraintHorizontal_bias="0.521"
+                    app:layout_constraintStart_toStartOf="@+id/fl3_button_next1"
+                    app:layout_constraintTop_toBottomOf="@+id/fl3_button_next1" />
 
                 <ImageView
                     android:id="@+id/fl2_imgMain"
-                    android:layout_width="253dp"
-                    android:layout_height="162dp"
+                    android:layout_width="231dp"
+                    android:layout_height="214dp"
                     android:layout_marginBottom="32dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.305"
-                    app:srcCompat="@drawable/test_free_people" />
+                    app:layout_constraintVertical_bias="0.074"
+                    app:srcCompat="@drawable/svg_firstlaunch3_main" />
 
                 <ImageView
-                    android:id="@+id/fl2_slider1"
-                    android:layout_width="80dp"
+                    android:id="@+id/slider1"
+                    android:layout_width="70dp"
                     android:layout_height="3dp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/fl2_sliderActive"
-                    app:layout_constraintEnd_toStartOf="@+id/fl2_sliderActive"
-                    app:layout_constraintTop_toTopOf="@+id/fl2_sliderActive"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/slider_active"
+                    app:layout_constraintEnd_toStartOf="@+id/slider_active"
+                    app:layout_constraintTop_toTopOf="@+id/slider_active"
+                    app:layout_constraintVertical_bias="0.0"
                     app:srcCompat="@drawable/slides" />
 
                 <Button
-                    android:id="@+id/fl2_button_next2"
+                    android:id="@+id/fl3_button_next1"
                     style="@android:style/Widget.Button"
-                    android:layout_width="284dp"
-                    android:layout_height="60dp"
+                    android:layout_width="259dp"
+                    android:layout_height="57dp"
+                    android:layout_marginTop="24dp"
                     android:background="@drawable/button"
                     android:fontFamily="@font/sfpro_bold"
-                    android:text="Хочу попробовать!"
+                    android:text="Начать пробные 3 дня"
                     android:textColor="#FFFFFF"
                     android:textSize="17sp"
-                    tools:layout_editor_absoluteX="63dp"
-                    tools:layout_editor_absoluteY="399dp" />
+                    app:layout_constraintEnd_toEndOf="@+id/imageView"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
                 <TextView
-                    android:id="@+id/fl2_text1"
+                    android:id="@+id/fl3_text1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
                     android:fontFamily="@font/sfpro_bold"
                     android:text="Попробуй бесплатно"
                     android:textColor="#2E4085"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="@+id/fl2_imgMain"
-                    app:layout_constraintHorizontal_bias="0.489"
+                    app:layout_constraintHorizontal_bias="0.485"
                     app:layout_constraintStart_toStartOf="@+id/fl2_imgMain"
                     app:layout_constraintTop_toBottomOf="@+id/fl2_imgMain" />
 
@@ -110,12 +134,33 @@
                     android:id="@+id/fl2_buttonClose"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintHorizontal_bias="0.42"
-                    app:layout_constraintBottom_toBottomOf="@+id/fl2_slider1"
-                    app:layout_constraintEnd_toStartOf="@+id/fl2_slider1"
+                    app:layout_constraintBottom_toBottomOf="@+id/slider1"
+                    app:layout_constraintEnd_toStartOf="@+id/slider1"
+                    app:layout_constraintHorizontal_bias="0.563"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/fl2_slider1"
+                    app:layout_constraintTop_toTopOf="@+id/slider1"
                     app:srcCompat="@drawable/ic_close" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView2"
+                    app:layout_constraintStart_toStartOf="@+id/imageView2"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                    app:srcCompat="@drawable/ic_button_3days" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="@+id/fl2_text2"
+                    app:layout_constraintHorizontal_bias="0.555"
+                    app:layout_constraintStart_toStartOf="@+id/fl2_text2"
+                    app:layout_constraintTop_toBottomOf="@+id/fl2_text2"
+                    app:srcCompat="@drawable/ic_button_leader" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
