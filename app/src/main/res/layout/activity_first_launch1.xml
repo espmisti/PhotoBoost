@@ -102,4 +102,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/slider_active"
         app:srcCompat="@drawable/ic_close" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

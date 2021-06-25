@@ -106,14 +106,14 @@
                     style="@android:style/Widget.Button"
                     android:layout_width="259dp"
                     android:layout_height="57dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/button"
                     android:fontFamily="@font/sfpro_bold"
                     android:text="Начать пробные 3 дня"
                     android:textColor="#FFFFFF"
                     android:textSize="17sp"
                     app:layout_constraintEnd_toEndOf="@+id/imageView"
-                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/imageView"
                     app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -131,7 +131,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/fl2_imgMain" />
 
                 <ImageView
-                    android:id="@+id/fl2_buttonClose"
+                    android:id="@+id/fl3_buttonClose"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="@+id/slider1"
