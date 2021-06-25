@@ -4,7 +4,7 @@
         android:title="Premium поиск"
         android:icon="@drawable/ic_premiumsearch"/>
     <item android:id="@+id/mText"
-        android:title="Поиск"
+        android:title="Поиск по подписке"
         android:enabled="false" />
     <item android:id="@+id/mMenu"
         android:title="Перейти в меню"

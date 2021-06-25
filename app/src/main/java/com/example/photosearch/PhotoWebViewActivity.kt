@@ -21,13 +21,17 @@ import kotlinx.android.synthetic.main.activity_photo_web_view.*
 
 class PhotoWebViewActivity : AppCompatActivity() {
     private var shared: SharedPreferences? = null
-    var TEST_STRING = "https://yandex.ru/"
+    var TEST_STRING = "https://yandex.ru/images/search"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_photo_web_view)
+
+        var uriImage = intent.getStringExtra("uri")
+
+
         shared = getSharedPreferences("APP", MODE_PRIVATE)
         if (isNetworkConnected) {
-            initView(TEST_STRING)
+            initView("http://images.google.com/searchbyimage?image_url=$uriImage")
         } else {
             layout?.setVisibility(View.GONE)
             //     progressBar.setVisibility(View.GONE);
@@ -112,7 +116,7 @@ class PhotoWebViewActivity : AppCompatActivity() {
     private fun navigationButtons() {
         btnYandex.setOnClickListener {
             btnYandex.setTextColor(getColor(R.color.active_search_service))
-            initView("https://yandex.ru/images/?utm_source=main_stripe_big")
+            initView("https://yandex.ru/images/search")
             //
             btnGoogle.setTextColor(getColor(R.color.unactive_search_service))
             btnTinEye.setTextColor(getColor(R.color.unactive_search_service))

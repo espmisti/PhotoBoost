@@ -1,4 +1,5 @@
 package com.example.photosearch
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html
@@ -23,6 +24,11 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        btnSearch.setOnClickListener {
+            openGalleryForImage()
+
+        }
 
         //textDescMain.text = Html.fromHtml("<u>Подписка активна<br></u>")
         bottonNavigatorView.background = null
@@ -59,4 +65,20 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
+    private fun openGalleryForImage() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, 1)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == 1){
+            imageView5.setImageURI(data?.data) // handle chosen image
+            Toast.makeText(this, "${data?.data}", Toast.LENGTH_SHORT).show()
+            var intent = Intent(this, PhotoWebViewActivity::class.java)
+            intent.putExtra("uri", data?.data.toString())
+            startActivity(intent)
+        }
+    }
 }
