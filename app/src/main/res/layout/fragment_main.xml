@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_second"
+    tools:context=".MainFragment">
+
+    <Button
+        android:id="@+id/f_main_button_choose_tariff"
+        style="@android:style/Widget.Button"
+        android:layout_width="300dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button"
+        android:fontFamily="@font/sfpro_bold"
+        android:text="Выбрать тариф"
+        android:textColor="#FFFFFF"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="@+id/m_text_subscription"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/m_text_subscription"
+        app:layout_constraintTop_toBottomOf="@+id/m_text_subscription" />
+
+    <TextView
+        android:id="@+id/m_text_subscription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/sfpro_regular"
+        android:text="Подписка активна"
+        android:textAlignment="center"
+        android:textColor="#5266B9"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/fl_text"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="@+id/fl_text"
+        app:layout_constraintTop_toBottomOf="@+id/fl_text" />
+
+    <TextView
+        android:id="@+id/fl_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/sfpro_bold"
+        android:text="Профиль"
+        android:textColor="#2E4085"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView7"
+        app:layout_constraintStart_toStartOf="@+id/imageView7"
+        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+
+    <ImageView
+        android:id="@+id/m_button_history"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:src="@drawable/ic_history"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/app_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/square_white"
+        android:text="Вам доступен 1 бесплатный поиск"
+        android:textAlignment="center"
+        android:textColor="#5266B9"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/f_main_button_choose_tariff"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="@+id/f_main_button_choose_tariff"
+        app:layout_constraintTop_toBottomOf="@+id/f_main_button_choose_tariff" />
+</androidx.constraintlayout.widget.ConstraintLayout>

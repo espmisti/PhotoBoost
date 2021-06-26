@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.text.Html
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_history.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 import androidx.core.app.ActivityCompat
@@ -13,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_main.*
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
@@ -25,11 +25,14 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Подгрузка основного фрагмента
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, MainFragment()).commit()
+
         btnSearch.setOnClickListener {
             openGalleryForImage()
 
         }
-
+        var selectedFragment: Fragment? = null
         //textDescMain.text = Html.fromHtml("<u>Подписка активна<br></u>")
         bottonNavigatorView.background = null
         floatbar_bg.isEnabled = false
@@ -48,7 +51,6 @@ class MainActivity : AppCompatActivity(){
 //            finish()
 //        }
         //(findViewById<ImageButton>(R.id.b_history)).setOnClickListener { startActivity(Intent(this, ))}
-        var selectedFragment: Fragment? = null
         bottonNavigatorView.setOnNavigationItemSelectedListener{
             item -> when (item.itemId){
                 R.id.mPremium ->{
@@ -74,9 +76,9 @@ class MainActivity : AppCompatActivity(){
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == 1){
-            imageView5.setImageURI(data?.data) // handle chosen image
+            //imageView5.setImageURI(data?.data) // handle chosen image
             Toast.makeText(this, "${data?.data}", Toast.LENGTH_SHORT).show()
-            var intent = Intent(this, PhotoWebViewActivity::class.java)
+            //var intent = Intent(this, PhotoWebViewActivity::class.java)
             intent.putExtra("uri", data?.data.toString())
             startActivity(intent)
         }

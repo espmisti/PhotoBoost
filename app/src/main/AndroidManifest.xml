@@ -16,7 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
         <activity android:name=".LoadingActivity"></activity>
-        <activity android:name=".HistoryActivity" />
         <activity android:name=".PhotoWebViewActivity" />
         <activity android:name=".FirstLaunch3Activity" />
         <activity android:name=".FirstLaunch2Activity" />

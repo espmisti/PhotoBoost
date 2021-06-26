@@ -27,7 +27,7 @@ class PhotoWebViewActivity : AppCompatActivity() {
         setContentView(R.layout.activity_photo_web_view)
 
         var uriImage = intent.getStringExtra("uri")
-
+        // yandex search = https://yandex.ru/images/search?rpt=imageview&url=https://mykaleidoscope.ru/uploads/posts/2020-01/1579886452_38-p-kapkeiki-66.jpg
 
         shared = getSharedPreferences("APP", MODE_PRIVATE)
         if (isNetworkConnected) {
