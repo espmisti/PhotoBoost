@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_second"
+    tools:context=".FeedBackFragment">
+
+    <TextView
+        android:id="@+id/p_maintext"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/sfpro_regular"
+        android:text="Откройте приложение Play Маркет на устройстве Android.\n\nУбедитесь, что вы вошли в правильный аккаунт Google.\n\nНажмите на значок «Меню» → «Подписки».\n\nНайдите подписку, которую нужно отменить.\n\nНажмите «Отменить подписку», следуйте дальнейшим инструкциям. "
+        android:textColor="#5266B9"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/p_textheader"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="@+id/p_textheader"
+        app:layout_constraintTop_toBottomOf="@+id/p_textheader" />
+
+    <TextView
+        android:id="@+id/sc_maintext2"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/sfpro_regular"
+        android:text="При отмене подписки вы будете по-прежнему иметь доступ к контенту до окончания оплаченного периода."
+        android:textColor="#5266B9"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/sc_textheader2"
+        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintStart_toStartOf="@+id/sc_textheader2"
+        app:layout_constraintTop_toBottomOf="@+id/sc_textheader2" />
+
+    <TextView
+        android:id="@+id/p_textheader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/sfpro_bold"
+        android:text="Отмена подписки"
+        android:textColor="#2E4085"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/sc_textheader2"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/sfpro_bold"
+        android:text="Что происходит после отмены подписки"
+        android:textAlignment="center"
+        android:textColor="#2E4085"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/p_maintext"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="@+id/p_maintext"
+        app:layout_constraintTop_toBottomOf="@+id/p_maintext" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

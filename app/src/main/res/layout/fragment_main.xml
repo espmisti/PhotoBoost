@@ -8,7 +8,7 @@
     tools:context=".MainFragment">
 
     <Button
-        android:id="@+id/f_main_button_choose_tariff"
+        android:id="@+id/m_button_choose_tariff"
         style="@android:style/Widget.Button"
         android:layout_width="300dp"
         android:layout_height="57dp"
@@ -32,14 +32,14 @@
         android:text="Подписка активна"
         android:textAlignment="center"
         android:textColor="#5266B9"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/fl_text"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/m_textheader"
         app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="@+id/fl_text"
-        app:layout_constraintTop_toBottomOf="@+id/fl_text" />
+        app:layout_constraintStart_toStartOf="@+id/m_textheader"
+        app:layout_constraintTop_toBottomOf="@+id/m_textheader" />
 
     <TextView
-        android:id="@+id/fl_text"
+        android:id="@+id/m_textheader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -47,9 +47,9 @@
         android:text="Профиль"
         android:textColor="#2E4085"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView7"
-        app:layout_constraintStart_toStartOf="@+id/imageView7"
-        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+        app:layout_constraintEnd_toEndOf="@+id/m_image"
+        app:layout_constraintStart_toStartOf="@+id/m_image"
+        app:layout_constraintTop_toBottomOf="@+id/m_image" />
 
     <ImageView
         android:id="@+id/m_button_history"
@@ -62,10 +62,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/m_image"
         android:layout_width="170dp"
         android:layout_height="170dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="100dp"
         android:src="@drawable/app_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -73,7 +73,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/m_iscansearch"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -82,8 +82,8 @@
         android:textAlignment="center"
         android:textColor="#5266B9"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/f_main_button_choose_tariff"
+        app:layout_constraintEnd_toEndOf="@+id/m_button_choose_tariff"
         app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="@+id/f_main_button_choose_tariff"
-        app:layout_constraintTop_toBottomOf="@+id/f_main_button_choose_tariff" />
+        app:layout_constraintStart_toStartOf="@+id/m_button_choose_tariff"
+        app:layout_constraintTop_toBottomOf="@+id/m_button_choose_tariff" />
 </androidx.constraintlayout.widget.ConstraintLayout>

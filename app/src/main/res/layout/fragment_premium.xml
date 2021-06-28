@@ -6,10 +6,20 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_second" >
 
+    <ImageView
+        android:id="@+id/p_button_history"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:src="@drawable/ic_history"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
-        android:id="@+id/p_buttonBuySearch"
+        android:id="@+id/p_button_buysearch"
         style="@android:style/Widget.Button"
-        android:layout_width="259dp"
+        android:layout_width="300dp"
         android:layout_height="57dp"
         android:layout_marginTop="36dp"
         android:background="@drawable/button"
@@ -17,12 +27,12 @@
         android:text="Оплатить поиски"
         android:textColor="#FFFFFF"
         android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="@+id/p_textheader3"
-        app:layout_constraintStart_toStartOf="@+id/p_textheader3"
-        app:layout_constraintTop_toBottomOf="@+id/p_textheader3" />
+        app:layout_constraintEnd_toEndOf="@+id/p_textmain2"
+        app:layout_constraintStart_toStartOf="@+id/p_textmain2"
+        app:layout_constraintTop_toBottomOf="@+id/p_textmain2" />
 
     <TextView
-        android:id="@+id/fl_text3"
+        android:id="@+id/p_maintext"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -52,7 +62,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/p_textheader3"
+        android:id="@+id/p_textmain2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -63,13 +73,13 @@
         android:text="Доступно поисков"
         android:textColor="#2E4085"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/p_textheader2"
+        app:layout_constraintEnd_toEndOf="@+id/p_count"
         app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="@+id/p_textheader2"
-        app:layout_constraintTop_toBottomOf="@+id/p_textheader2" />
+        app:layout_constraintStart_toStartOf="@+id/p_count"
+        app:layout_constraintTop_toBottomOf="@+id/p_count" />
 
     <TextView
-        android:id="@+id/p_textheader2"
+        android:id="@+id/p_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -80,30 +90,30 @@
         android:text="0"
         android:textColor="#2E4085"
         android:textSize="35dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton"
-        app:layout_constraintStart_toStartOf="@+id/imageButton"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+        app:layout_constraintEnd_toEndOf="@+id/p_button_search"
+        app:layout_constraintStart_toStartOf="@+id/p_button_search"
+        app:layout_constraintTop_toBottomOf="@+id/p_button_search" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/p_button_search"
         android:layout_width="108dp"
         android:layout_height="106dp"
         android:layout_marginTop="32dp"
         android:background="#00FFFFFF"
-        app:layout_constraintEnd_toEndOf="@+id/fl_text3"
-        app:layout_constraintStart_toStartOf="@+id/fl_text3"
-        app:layout_constraintTop_toBottomOf="@+id/fl_text3"
+        app:layout_constraintEnd_toEndOf="@+id/p_maintext"
+        app:layout_constraintStart_toStartOf="@+id/p_maintext"
+        app:layout_constraintTop_toBottomOf="@+id/p_maintext"
         app:srcCompat="@drawable/ic_button_plus" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/p_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+        app:layout_constraintBottom_toBottomOf="@+id/p_button_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.108"
-        app:layout_constraintStart_toEndOf="@+id/imageButton"
-        app:layout_constraintTop_toBottomOf="@+id/fl_text3"
+        app:layout_constraintStart_toEndOf="@+id/p_button_search"
+        app:layout_constraintTop_toBottomOf="@+id/p_maintext"
         app:layout_constraintVertical_bias="0.095"
         app:srcCompat="@drawable/ic_arrow" />
 </androidx.constraintlayout.widget.ConstraintLayout>

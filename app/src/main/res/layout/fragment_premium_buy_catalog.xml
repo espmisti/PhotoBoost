@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_second">
+    android:background="@drawable/bg_second"
+    tools:context=".PremiumBuyCatalogFragment">
 
     <Button
         android:id="@+id/c_buttonBuySearch"
@@ -100,7 +101,7 @@
     </TableLayout>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/menu_text_subscription_button"
         android:layout_width="371dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -113,5 +114,6 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/c_buttonBuySearch"
         app:layout_constraintTop_toBottomOf="@+id/c_buttonBuySearch" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

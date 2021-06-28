@@ -1,72 +1,87 @@
 package com.example.photosearch
+
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
-import android.text.Html
+import android.os.Environment
+import android.provider.MediaStore
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
-
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import androidx.core.net.toFile
+import androidx.core.net.toUri
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
+import org.apache.commons.net.ftp.FTPClient
+import java.io.*
 import java.io.File
-import java.io.FileNotFoundException
-import java.io.FileOutputStream
-import java.io.IOException
-import java.util.*
+import kotlin.concurrent.thread
+
 
 class MainActivity : AppCompatActivity(){
+
+    val TAG = "saske"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Подгрузка основного фрагмента
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        navigationView2.itemIconTintList = null
+// Подгрузка основного фрагмента
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, MainFragment()).commit()
 
         btnSearch.setOnClickListener {
-            openGalleryForImage()
-
+// openGalleryForImage()
+            insertPhoto()
+// var intent = Intent(this, PhotoWebViewActivity::class.java)
+// startActivity(intent)
         }
         var selectedFragment: Fragment? = null
-        //textDescMain.text = Html.fromHtml("<u>Подписка активна<br></u>")
+//textDescMain.text = Html.fromHtml("<u>Подписка активна<br></u>")
         bottonNavigatorView.background = null
         floatbar_bg.isEnabled = false
 
 
-//        window.navigationBarColor = resources.getColor(R.color.black)
-//        window.navigationBarColor = ContextCompat.getColor(this, R.color.black);
-//        window.statusBarColor = ContextCompat.getColor(this,R.color.black);
+// window.navigationBarColor = resources.getColor(R.color.black)
+// window.navigationBarColor = ContextCompat.getColor(this, R.color.black);
+// window.statusBarColor = ContextCompat.getColor(this,R.color.black);
 
-//        btnChoosePlan.setOnClickListener{
-//            startActivity(Intent(this, PhotoWebViewActivity::class.java))
-//        }
+// btnChoosePlan.setOnClickListener{
+// startActivity(Intent(this, PhotoWebViewActivity::class.java))
+// }
 
-//        btnHistory.setOnClickListener {
-//            startActivity(Intent(this, HistoryActivity::class.java))
-//            finish()
-//        }
-        //(findViewById<ImageButton>(R.id.b_history)).setOnClickListener { startActivity(Intent(this, ))}
+// btnHistory.setOnClickListener {
+// startActivity(Intent(this, HistoryActivity::class.java))
+// finish()
+// }
+//(findViewById<ImageButton>(R.id.b_history)).setOnClickListener { startActivity(Intent(this, ))}
         bottonNavigatorView.setOnNavigationItemSelectedListener{
             item -> when (item.itemId){
                 R.id.mPremium ->{
                     selectedFragment = PremiumFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container,
+                        selectedFragment!!
+                    ).commit()
                 }
                 R.id.mMenu -> {
-                    Toast.makeText(this, "ебанный даун", Toast.LENGTH_SHORT).show()
+                    drawerLayout.openDrawer(GravityCompat.START)
                 }
             }
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container,
-                selectedFragment!!
-            ).commit()
             true
         }
     }
 
+    // взять фотку из галереи
     private fun openGalleryForImage() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
@@ -76,11 +91,135 @@ class MainActivity : AppCompatActivity(){
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == 1){
-            //imageView5.setImageURI(data?.data) // handle chosen image
-            Toast.makeText(this, "${data?.data}", Toast.LENGTH_SHORT).show()
-            //var intent = Intent(this, PhotoWebViewActivity::class.java)
-            intent.putExtra("uri", data?.data.toString())
-            startActivity(intent)
+            val myImage = File(getPath(data?.data))
+            try {
+                var gpath:String = Environment.getExternalStorageDirectory().absolutePath
+                Log.i(TAG, "file: $gpath")
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.i(TAG, "eeeeeeeeeeee: $e")
+            }
+            Toast.makeText(this, "$myImage", Toast.LENGTH_SHORT).show()
+            Log.i(TAG, "${data?.data} ")
+            Log.i(TAG, "imageFile: $myImage")
+
+            val ftpClient = FTPClient()
+            thread {
+                try {
+                    ftpClient.connect("z96082yn.beget.tech")
+                    ftpClient.login("z96082yn", "XTYSDbPI")
+                    ftpClient.enterLocalPassiveMode()
+                    Log.i(TAG, "CONNECTED")
+                    val dirPath = "./z96082yn.beget.tech/public_html"
+//
+// val file = File(R.drawable.bg_first)
+
+                    val file = myImage
+                    Log.i(TAG, "file: $file")
+
+                    val bufferedWriter = BufferedWriter(FileWriter(file))
+                    bufferedWriter.write(file.toString())
+                    bufferedWriter.close()
+                    val inputStream: InputStream = FileInputStream(file)
+                    ftpClient.storeFile("$dirPath/${myImage.name}", inputStream)
+                    inputStream.close()
+//END OF FILE UPLOADING
+                    ftpClient.logout()
+                    ftpClient.disconnect()
+                    Log.i(TAG, "DISCONNECTED")
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    Log.i(TAG, "ты тупой еблан $e")
+                }
+            }
         }
     }
+
+    fun getPath(uri: Uri?): String? {
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = contentResolver.query(uri!!, projection, null, null, null) ?: return null
+        val column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        cursor.moveToFirst()
+        val s = cursor.getString(column_index)
+        cursor.close()
+        return s
+    }
+
+    private val REQUEST_CODE_ASK_PERMISSIONS = 123
+
+    private fun insertPhoto() {
+        val hasWriteContactsPermission = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE_ASK_PERMISSIONS)
+            return
+        }
+        openGalleryForImage()
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            REQUEST_CODE_ASK_PERMISSIONS -> if (grantResults[0] === PackageManager.PERMISSION_GRANTED) {
+// Permission Granted
+                openGalleryForImage()
+            } else {
+// Permission Denied
+                Toast.makeText(this@MainActivity, "нету разрешения очкоблядун блять", Toast.LENGTH_SHORT)
+                    .show()
+            }
+            else -> super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        }
+    }
+
+    fun bitmapToFile(bitmap: Bitmap, fileNameToSave: String): File? { // File name like "image.png"
+//create a file to write bitmap data
+        var file: File? = null
+        return try {
+            file = File(Environment.getExternalStorageDirectory().toString() + File.separator + fileNameToSave)
+            file.createNewFile()
+
+//Convert bitmap to byte array
+            val bos = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 0, bos) // YOU can also save it in JPEG
+            val bitmapdata = bos.toByteArray()
+
+//write the bytes in file
+            val fos = FileOutputStream(file)
+            fos.write(bitmapdata)
+            fos.flush()
+            fos.close()
+            file
+        } catch (e: Exception) {
+            e.printStackTrace()
+            file // it will return null
+        }
+    }
+    // Меню кнопки
+
+    fun feedback(view: View) {
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, FeedBackFragment()).commit()
+        drawerLayout.closeDrawer(GravityCompat.START)
+    }
+
+    fun refund(view: View) {
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, RefundFragment()).commit()
+        drawerLayout.closeDrawer(GravityCompat.START)
+    }
+
+    fun subscriptioncontrol(view: View) {
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, SubscriptionControlFragment()).commit()
+        drawerLayout.closeDrawer(GravityCompat.START)
+    }
+
+    fun premiumsearch(view: View) {
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, PremiumFragment()).commit()
+        drawerLayout.closeDrawer(GravityCompat.START)
+    }
+
+    fun subscription(view: View) {
+// supportFragmentManager.beginTransaction().replace(R.id.fragment_container, PremiumFragment()).commit()
+// drawerLayout.closeDrawer(GravityCompat.START)
+    }
+
+
 }

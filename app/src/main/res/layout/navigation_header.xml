@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+
+    <TextView
+        android:id="@+id/menu_textheader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/sfpro_bold"
+        android:text="Меню"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/menu_subscription"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/square_whitestroke"
+        android:fontFamily="@font/sfpro_bold"
+        android:gravity="center"
+        android:onClick="subscription"
+        android:text="Подписка не оформлена"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu_textheader" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu_button_subscription"
+        android:layout_width="362dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/menu_subscription"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/menu_subscription"
+        app:layout_constraintTop_toBottomOf="@+id/menu_subscription">
+
+        <TextView
+            android:id="@+id/menu_text_subscription_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/sfpro_regular"
+            android:text="Оформить подписку"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/menu_line1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/menu_button_subscription"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="@+id/menu_button_subscription"
+        app:layout_constraintTop_toBottomOf="@+id/menu_button_subscription"
+        app:srcCompat="@drawable/line" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu_button_searchsubscription"
+        android:layout_width="362dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/menu_line1"
+        app:layout_constraintStart_toStartOf="@+id/menu_line1"
+        app:layout_constraintTop_toBottomOf="@+id/menu_line1">
+
+        <TextView
+            android:id="@+id/menu_text_searchsubscription_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/sfpro_regular"
+            android:text="Поиск по подписке"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/m_image"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/menu_button_searchsubscription"
+        app:layout_constraintStart_toStartOf="@+id/menu_button_searchsubscription"
+        app:layout_constraintTop_toBottomOf="@+id/menu_button_searchsubscription"
+        app:srcCompat="@drawable/line" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu_button_searchpremium"
+        android:layout_width="362dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:onClick="premiumsearch"
+        app:layout_constraintEnd_toEndOf="@+id/m_image"
+        app:layout_constraintStart_toStartOf="@+id/m_image"
+        app:layout_constraintTop_toBottomOf="@+id/m_image">
+
+        <TextView
+            android:id="@+id/menu_text_searchpremium_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/sfpro_regular"
+            android:text="Premium поиск"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/menu_line3"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/menu_button_searchsubscription"
+        app:layout_constraintStart_toStartOf="@+id/menu_button_searchpremium"
+        app:layout_constraintTop_toBottomOf="@+id/menu_button_searchpremium"
+        app:srcCompat="@drawable/line" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu_button_likeapp"
+        android:layout_width="362dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/menu_line3"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/menu_line3"
+        app:layout_constraintTop_toBottomOf="@+id/menu_line3">
+
+        <TextView
+            android:id="@+id/menu_text_likeapp_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/sfpro_regular"
+            android:text="Оценить приложение"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/menu_line4"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/menu_button_likeapp"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="@+id/menu_button_likeapp"
+        app:layout_constraintTop_toBottomOf="@+id/menu_button_likeapp"
+        app:srcCompat="@drawable/line" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu_button_feedback"
+        android:layout_width="362dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:onClick="feedback"
+        app:layout_constraintEnd_toEndOf="@+id/menu_line4"
+        app:layout_constraintStart_toStartOf="@+id/menu_line4"
+        app:layout_constraintTop_toBottomOf="@+id/menu_line4">
+
+        <TextView
+            android:id="@+id/menu_text_feedback_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/sfpro_regular"
+            android:text="Обратная связь"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/menu_line5"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/menu_button_feedback"
+        app:layout_constraintStart_toStartOf="@+id/menu_button_feedback"
+        app:layout_constraintTop_toBottomOf="@+id/menu_button_feedback"
+        app:srcCompat="@drawable/line" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu_button_subscriptioncontrol"
+        android:layout_width="362dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:onClick="subscriptioncontrol"
+        app:layout_constraintEnd_toEndOf="@+id/menu_line5"
+        app:layout_constraintStart_toStartOf="@+id/menu_line5"
+        app:layout_constraintTop_toBottomOf="@+id/menu_line5">
+
+        <TextView
+            android:id="@+id/menu_text_subscriptioncontrol_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/sfpro_regular"
+            android:text="Управление подпиской"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/menu_line6"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/menu_button_subscriptioncontrol"
+        app:layout_constraintStart_toStartOf="@+id/menu_button_subscriptioncontrol"
+        app:layout_constraintTop_toBottomOf="@+id/menu_button_subscriptioncontrol"
+        app:srcCompat="@drawable/line" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu_button_refund"
+        android:layout_width="362dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:onClick="refund"
+        app:layout_constraintEnd_toEndOf="@+id/menu_line6"
+        app:layout_constraintStart_toStartOf="@+id/menu_line6"
+        app:layout_constraintTop_toBottomOf="@+id/menu_line6">
+
+        <TextView
+            android:id="@+id/menu_text_refund_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/sfpro_regular"
+            android:text="Возвраты"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/menu_textversion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="120dp"
+        android:fontFamily="@font/sfpro_regular"
+        android:text="@string/version"
+        android:textColor="#BCBCBC"
+        app:layout_constraintEnd_toEndOf="@+id/menu_button_refund"
+        app:layout_constraintTop_toBottomOf="@+id/menu_button_refund" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
