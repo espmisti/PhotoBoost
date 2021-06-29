@@ -37,8 +37,10 @@ class MainActivity : AppCompatActivity(){
 
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         navigationView2.itemIconTintList = null
-// Подгрузка основного фрагмента
+
+        // Подгрузка основного фрагмента
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, MainFragment()).commit()
+
 
         btnSearch.setOnClickListener {
 // openGalleryForImage()
@@ -117,10 +119,11 @@ class MainActivity : AppCompatActivity(){
                     val file = myImage
                     Log.i(TAG, "file: $file")
 
-                    val bufferedWriter = BufferedWriter(FileWriter(file))
-                    bufferedWriter.write(file.toString())
-                    bufferedWriter.close()
+//                    val bufferedWriter = BufferedWriter(FileWriter(file))
+//                    bufferedWriter.write(file.toString())
+//                    bufferedWriter.close()
                     val inputStream: InputStream = FileInputStream(file)
+                    Log.i(TAG, "twetwetwet: $$dirPath/${myImage.name}")
                     ftpClient.storeFile("$dirPath/${myImage.name}", inputStream)
                     inputStream.close()
 //END OF FILE UPLOADING
