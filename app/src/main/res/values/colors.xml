@@ -11,4 +11,5 @@
     <color name="active_search_service">#314AAE</color>
     <color name="button">#5266B9</color>
     <color name="bg_menu">#3D3D3D</color>
+    <color name="bg_menu_2">#DEE5FF</color>
 </resources>

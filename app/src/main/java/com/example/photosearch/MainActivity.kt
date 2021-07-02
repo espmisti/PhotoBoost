@@ -2,10 +2,13 @@ package com.example.photosearch
 
 import android.Manifest
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -14,10 +17,12 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.dialog.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import me.echodev.resizer.Resizer
 import org.apache.commons.net.ftp.FTPClient
@@ -25,24 +30,27 @@ import java.io.*
 import java.io.File
 import kotlin.concurrent.thread
 
-
+private const val REQUEST_CODE = 42
 class MainActivity : AppCompatActivity(){
 
     val TAG = "saske"
+    lateinit var dialogChoose: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        window.navigationBarColor = ContextCompat.getColor(this, R.color.white)
 
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         navigationView2.itemIconTintList = null
 
         // Подгрузка основного фрагмента
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, MainFragment()).commit()
-//
+        dialogChoose=Dialog(this)
         btnSearch.setOnClickListener {
 // openGalleryForImage()
-            insertPhoto()
+            openDialog()
 // var intent = Intent(this, PhotoWebViewActivity::class.java)
 // startActivity(intent)
         }
@@ -52,9 +60,9 @@ class MainActivity : AppCompatActivity(){
         floatbar_bg.isEnabled = false
 
 
-// window.navigationBarColor = resources.getColor(R.color.black)
-// window.navigationBarColor = ContextCompat.getColor(this, R.color.black);
-// window.statusBarColor = ContextCompat.getColor(this,R.color.black);
+
+
+
 
 // btnChoosePlan.setOnClickListener{
 // startActivity(Intent(this, PhotoWebViewActivity::class.java))
@@ -88,7 +96,10 @@ class MainActivity : AppCompatActivity(){
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
+            val takenImage = data?.extras?.get("data") as Bitmap
+            Toast.makeText(this, "$takenImage", Toast.LENGTH_SHORT).show()
+        }
         if (resultCode == Activity.RESULT_OK && requestCode == 1){
             val myImage = File(getPath(data?.data))
             val uriImage: Uri? = data?.data
@@ -133,6 +144,7 @@ class MainActivity : AppCompatActivity(){
                 }
             }
         }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     fun getPath(uri: Uri?): String? {
@@ -154,6 +166,14 @@ class MainActivity : AppCompatActivity(){
             return
         }
         openGalleryForImage()
+    }
+    fun toPhotograph(){
+        var photo = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if(photo.resolveActivity(this.packageManager) != null){
+            startActivityForResult(photo, REQUEST_CODE)
+        } else {
+            Toast.makeText(this, "Негры", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -220,6 +240,22 @@ class MainActivity : AppCompatActivity(){
 // supportFragmentManager.beginTransaction().replace(R.id.fragment_container, PremiumFragment()).commit()
 // drawerLayout.closeDrawer(GravityCompat.START)
     }
+
+    fun openDialog(){
+        dialogChoose.setContentView(R.layout.dialog)
+        dialogChoose.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialogChoose.show()
+    }
+
+
+
+    // <- Кнопки в диалоге -> //
+
+    fun closeDialog(view: View) { dialogChoose.dismiss() }          // button for close dialog
+    fun chooseImageDialog(view: View) { insertPhoto() }             // button for choose photo from the gallery
+    fun photoCameraDialog(view: View) { toPhotograph() }            // button for open camera
+
+    // <-                  -> //
 
 
 }
