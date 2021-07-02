@@ -14,13 +14,12 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toFile
-import androidx.core.net.toUri
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
+import me.echodev.resizer.Resizer
 import org.apache.commons.net.ftp.FTPClient
 import java.io.*
 import java.io.File
@@ -94,16 +93,11 @@ class MainActivity : AppCompatActivity(){
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == 1){
             val myImage = File(getPath(data?.data))
-            try {
-                var gpath:String = Environment.getExternalStorageDirectory().absolutePath
-                Log.i(TAG, "file: $gpath")
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Log.i(TAG, "eeeeeeeeeeee: $e")
-            }
-            Toast.makeText(this, "$myImage", Toast.LENGTH_SHORT).show()
+            val uriImage: Uri? = data?.data
+            var bitmap: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uriImage)
+
             Log.i(TAG, "${data?.data} ")
-            Log.i(TAG, "imageFile: $myImage")
+            Log.i(TAG, "Выбранный файл из галереи: $myImage")
 
             val ftpClient = FTPClient()
             thread {
@@ -116,15 +110,20 @@ class MainActivity : AppCompatActivity(){
 //
 // val file = File(R.drawable.bg_first)
 
-                    val file = myImage
-                    Log.i(TAG, "file: $file")
+                    var filea: File = File("/storage/emulated/0/DCIM/fg/resizeq.jpg")
+                    val os: OutputStream = BufferedOutputStream(FileOutputStream(filea))
+                    bitmap = Bitmap.createScaledBitmap(bitmap, 200, 400, false)
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os)
+                    os.close();
 
-//                    val bufferedWriter = BufferedWriter(FileWriter(file))
-//                    bufferedWriter.write(file.toString())
-//                    bufferedWriter.close()
-                    val inputStream: InputStream = FileInputStream(file)
-                    Log.i(TAG, "twetwetwet: $$dirPath/${myImage.name}")
-                    ftpClient.storeFile("$dirPath/${myImage.name}", inputStream)
+                    val file = myImage
+                    Log.i(TAG, "file: $filea")
+
+                    val inputStream: InputStream = FileInputStream("/storage/emulated/0/DCIM/fg/resizeq.jpg")
+
+
+                    Log.i(TAG, "twetwetwet: $$dirPath/${filea.name}")
+                    ftpClient.storeFile("$dirPath/${filea.name}", inputStream)
                     inputStream.close()
 //END OF FILE UPLOADING
                     ftpClient.logout()
