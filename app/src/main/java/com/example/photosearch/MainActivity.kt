@@ -39,8 +39,7 @@ class MainActivity : AppCompatActivity(){
 
         // Подгрузка основного фрагмента
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, MainFragment()).commit()
-
-
+//
         btnSearch.setOnClickListener {
 // openGalleryForImage()
             insertPhoto()
@@ -65,7 +64,6 @@ class MainActivity : AppCompatActivity(){
 // startActivity(Intent(this, HistoryActivity::class.java))
 // finish()
 // }
-//(findViewById<ImageButton>(R.id.b_history)).setOnClickListener { startActivity(Intent(this, ))}
         bottonNavigatorView.setOnNavigationItemSelectedListener{
             item -> when (item.itemId){
                 R.id.mPremium ->{
