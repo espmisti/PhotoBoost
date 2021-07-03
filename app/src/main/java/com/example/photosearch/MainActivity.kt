@@ -6,7 +6,6 @@ import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -24,7 +23,6 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog.*
 import kotlinx.android.synthetic.main.fragment_main.*
-import me.echodev.resizer.Resizer
 import org.apache.commons.net.ftp.FTPClient
 import java.io.*
 import java.io.File
@@ -58,11 +56,6 @@ class MainActivity : AppCompatActivity(){
 //textDescMain.text = Html.fromHtml("<u>Подписка активна<br></u>")
         bottonNavigatorView.background = null
         floatbar_bg.isEnabled = false
-
-
-
-
-
 
 // btnChoosePlan.setOnClickListener{
 // startActivity(Intent(this, PhotoWebViewActivity::class.java))
@@ -101,12 +94,12 @@ class MainActivity : AppCompatActivity(){
             Toast.makeText(this, "$takenImage", Toast.LENGTH_SHORT).show()
         }
         if (resultCode == Activity.RESULT_OK && requestCode == 1){
-            val myImage = File(getPath(data?.data))
+            val file = File(getPath(data?.data))
             val uriImage: Uri? = data?.data
             var bitmap: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uriImage)
 
             Log.i(TAG, "${data?.data} ")
-            Log.i(TAG, "Выбранный файл из галереи: $myImage")
+            Log.i(TAG, "Выбранный файл из галереи: $file")
 
             val ftpClient = FTPClient()
             thread {
@@ -116,23 +109,30 @@ class MainActivity : AppCompatActivity(){
                     ftpClient.enterLocalPassiveMode()
                     Log.i(TAG, "CONNECTED")
                     val dirPath = "./z96082yn.beget.tech/public_html"
+
+//                    var filea: File = File("/storage/emulated/0/DCIM/fg/resizeq.jpg")
+//                    val os: OutputStream = BufferedOutputStream(FileOutputStream(filea))
+////                    bitmap = Bitmap.createScaledBitmap(bitmap, 200, 400, false)
+////                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os)
+//                    os.close();
 //
-// val file = File(R.drawable.bg_first)
+//                    val file = myImage
+//                    Log.i(TAG, "file: $filea")
+//
+//                    val inputStream: InputStream = FileInputStream("/storage/emulated/0/DCIM/fg/resizeq.jpg")
 
-                    var filea: File = File("/storage/emulated/0/DCIM/fg/resizeq.jpg")
-                    val os: OutputStream = BufferedOutputStream(FileOutputStream(filea))
-                    bitmap = Bitmap.createScaledBitmap(bitmap, 200, 400, false)
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os)
-                    os.close();
+//                    var filea: File = File(myImage.path)
 
-                    val file = myImage
-                    Log.i(TAG, "file: $filea")
-
-                    val inputStream: InputStream = FileInputStream("/storage/emulated/0/DCIM/fg/resizeq.jpg")
+//                    val os: OutputStream = BufferedOutputStream(FileOutputStream(file))
+//                    bitmap = Bitmap.createScaledBitmap(bitmap, 400, 200, false)
+//                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os)
+//                    os.close()
 
 
-                    Log.i(TAG, "twetwetwet: $$dirPath/${filea.name}")
-                    ftpClient.storeFile("$dirPath/${filea.name}", inputStream)
+                    val inputStream: InputStream = FileInputStream(file)
+
+                    Log.i(TAG, "twetwetwet: $$dirPath/${file.name}")
+                    ftpClient.storeFile("$dirPath/${file.name}", inputStream)
                     inputStream.close()
 //END OF FILE UPLOADING
                     ftpClient.logout()
