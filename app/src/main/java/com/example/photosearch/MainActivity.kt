@@ -3,10 +3,10 @@ package com.example.photosearch
 import android.Manifest
 import android.app.Activity
 import android.app.Dialog
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -24,17 +24,23 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog.*
 import kotlinx.android.synthetic.main.fragment_main.*
-import me.echodev.resizer.Resizer
 import org.apache.commons.net.ftp.FTPClient
 import java.io.*
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.concurrent.thread
 
-private const val REQUEST_CODE = 42
+
 class MainActivity : AppCompatActivity(){
 
     val TAG = "saske"
     lateinit var dialogChoose: Dialog
+
+    private val REQUEST_CODE_GALLERY = 1
+    private val REQUEST_CODE_CAMERA = 2
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,11 +100,64 @@ class MainActivity : AppCompatActivity(){
         intent.type = "image/*"
         startActivityForResult(intent, 1)
     }
+    val CAMERA_REQUEST = 64
+    private fun photograph(){
+        try{
+            val i: Intent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(i, CAMERA_REQUEST)
+        } catch (e: ActivityNotFoundException){
+            Log.e(TAG, "photograph: $e")
+            Toast.makeText(this, "Ваше приложение временно не поддерживать поиск через камеру!", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+//    private fun generateFileUri(type: Int): Uri? {
+//        var file: File? = null
+//        when (type) {
+//            TYPE_PHOTO -> file = File(
+//                directory.getPath().toString() + "/" + "photo_"
+//                        + System.currentTimeMillis() + ".jpg"
+//            )
+//            TYPE_VIDEO -> file = File(
+//                (directory.getPath().toString() + "/" + "video_"
+//                        + System.currentTimeMillis() + ".mp4")
+//            )
+//        }
+//        Log.d(TAG, "fileName = $file")
+//        return Uri.fromFile(file)
+//    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
-            val takenImage = data?.extras?.get("data") as Bitmap
-            Toast.makeText(this, "$takenImage", Toast.LENGTH_SHORT).show()
+        if(requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK){
+            //val myImage = File(getPath(data?.data))
+            var bit: Bitmap = data?.extras?.get("data") as Bitmap
+            val ftpClient = FTPClient()
+            thread {
+                try{
+                    connectFTP(ftpClient)
+                    Log.i(TAG, "CONNECTED")
+                    val dirPath = "./z96082yn.beget.tech/public_html"
+
+                    val filea: File = File("/storage/emulated/0/DCIM/fg/photo.jpg")
+                    val os: OutputStream = BufferedOutputStream(FileOutputStream(filea))
+                    bit = Bitmap.createScaledBitmap(bit, 800, 1000, false)
+                    bit.compress(Bitmap.CompressFormat.JPEG, 100, os)
+                    os.close()
+                    val inputStream: InputStream = FileInputStream("/storage/emulated/0/DCIM/fg/photo.jpg")
+                    Log.i(TAG, "file: $dirPath/${filea.name}")
+                    ftpClient.storeFile("$dirPath/${filea.name}", inputStream)
+                    inputStream.close()
+
+                    ftpClient.logout()
+                    ftpClient.disconnect()
+                    Log.i(TAG, "DISCONNECTED")
+
+
+                } catch (e: java.lang.Exception){
+                    e.printStackTrace()
+                    Log.e(TAG, "onActivityResult, thread: $e", )
+                }
+            }
         }
         if (resultCode == Activity.RESULT_OK && requestCode == 1){
             val myImage = File(getPath(data?.data))
@@ -111,17 +170,13 @@ class MainActivity : AppCompatActivity(){
             val ftpClient = FTPClient()
             thread {
                 try {
-                    ftpClient.connect("z96082yn.beget.tech")
-                    ftpClient.login("z96082yn", "XTYSDbPI")
-                    ftpClient.enterLocalPassiveMode()
+                    connectFTP(ftpClient)
                     Log.i(TAG, "CONNECTED")
                     val dirPath = "./z96082yn.beget.tech/public_html"
-//
-// val file = File(R.drawable.bg_first)
 
                     var filea: File = File("/storage/emulated/0/DCIM/fg/resizeq.jpg")
                     val os: OutputStream = BufferedOutputStream(FileOutputStream(filea))
-                    bitmap = Bitmap.createScaledBitmap(bitmap, 200, 400, false)
+                    bitmap = Bitmap.createScaledBitmap(bitmap, 400, 600, false)
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os)
                     os.close();
 
@@ -167,14 +222,22 @@ class MainActivity : AppCompatActivity(){
         }
         openGalleryForImage()
     }
-    fun toPhotograph(){
-        var photo = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        if(photo.resolveActivity(this.packageManager) != null){
-            startActivityForResult(photo, REQUEST_CODE)
-        } else {
-            Toast.makeText(this, "Негры", Toast.LENGTH_SHORT).show()
-        }
-    }
+//    private val MY_CAMERA_PERMISSION_CODE = 100
+////    fun toPhotograph(){
+////        val hasWriteContactsPermission = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+////        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+////            requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), MY_CAMERA_PERMISSION_CODE)
+////            return
+////        }
+////        openGalleryForImage()
+////
+////        var photo = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+////        if(photo.resolveActivity(this.packageManager) != null){
+////            startActivityForResult(photo, REQUEST_CODE_ASK_PERMISSIONS)
+////        } else {
+////            Toast.makeText(this, "Негры", Toast.LENGTH_SHORT).show()
+////        }
+//    }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -189,6 +252,12 @@ class MainActivity : AppCompatActivity(){
             }
             else -> super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         }
+    }
+
+    fun connectFTP(ftpClient: FTPClient){
+        ftpClient.connect("z96082yn.beget.tech")
+        ftpClient.login("z96082yn", "XTYSDbPI")
+        ftpClient.enterLocalPassiveMode()
     }
 
     fun bitmapToFile(bitmap: Bitmap, fileNameToSave: String): File? { // File name like "image.png"
@@ -253,7 +322,7 @@ class MainActivity : AppCompatActivity(){
 
     fun closeDialog(view: View) { dialogChoose.dismiss() }          // button for close dialog
     fun chooseImageDialog(view: View) { insertPhoto() }             // button for choose photo from the gallery
-    fun photoCameraDialog(view: View) { toPhotograph() }            // button for open camera
+    fun photoCameraDialog(view: View) { photograph() }            // button for open camera
 
     // <-                  -> //
 
