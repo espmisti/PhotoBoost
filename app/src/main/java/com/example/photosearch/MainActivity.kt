@@ -31,7 +31,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.concurrent.thread
 
-
 class MainActivity : AppCompatActivity(){
 
     val TAG = "saske"
@@ -160,12 +159,12 @@ class MainActivity : AppCompatActivity(){
             }
         }
         if (resultCode == Activity.RESULT_OK && requestCode == 1){
-            val myImage = File(getPath(data?.data))
+            val file = File(getPath(data?.data))
             val uriImage: Uri? = data?.data
             var bitmap: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uriImage)
 
             Log.i(TAG, "${data?.data} ")
-            Log.i(TAG, "Выбранный файл из галереи: $myImage")
+            Log.i(TAG, "Выбранный файл из галереи: $file")
 
             val ftpClient = FTPClient()
             thread {
@@ -183,11 +182,11 @@ class MainActivity : AppCompatActivity(){
                     val file = myImage
                     Log.i(TAG, "file: $filea")
 
-                    val inputStream: InputStream = FileInputStream("/storage/emulated/0/DCIM/fg/resizeq.jpg")
 
+                    val inputStream: InputStream = FileInputStream(file)
 
-                    Log.i(TAG, "twetwetwet: $$dirPath/${filea.name}")
-                    ftpClient.storeFile("$dirPath/${filea.name}", inputStream)
+                    Log.i(TAG, "twetwetwet: $$dirPath/${file.name}")
+                    ftpClient.storeFile("$dirPath/${file.name}", inputStream)
                     inputStream.close()
 //END OF FILE UPLOADING
                     ftpClient.logout()
