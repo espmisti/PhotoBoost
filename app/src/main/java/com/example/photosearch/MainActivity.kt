@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog.*
 import kotlinx.android.synthetic.main.fragment_main.*
+import org.apache.commons.net.ftp.FTP
 import org.apache.commons.net.ftp.FTPClient
 import java.io.*
 import java.io.File
@@ -135,11 +136,11 @@ class MainActivity : AppCompatActivity(){
                 try{
                     connectFTP(ftpClient)
                     Log.i(TAG, "CONNECTED")
-                    val dirPath = "./z96082yn.beget.tech/public_html"
+                    val dirPath = "./www/tanya.ru"
 
                     val filea: File = File("/storage/emulated/0/DCIM/fg/photo.jpg")
                     val os: OutputStream = BufferedOutputStream(FileOutputStream(filea))
-                    bit = Bitmap.createScaledBitmap(bit, 800, 1000, false)
+                    //bit = Bitmap.createScaledBitmap(bit, 800, 1000, false)
                     bit.compress(Bitmap.CompressFormat.JPEG, 100, os)
                     os.close()
                     val inputStream: InputStream = FileInputStream("/storage/emulated/0/DCIM/fg/photo.jpg")
@@ -159,19 +160,19 @@ class MainActivity : AppCompatActivity(){
             }
         }
         if (resultCode == Activity.RESULT_OK && requestCode == 1){
-            val file = File(getPath(data?.data))
+            val myImage = File(getPath(data?.data))
             val uriImage: Uri? = data?.data
             var bitmap: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uriImage)
 
             Log.i(TAG, "${data?.data} ")
-            Log.i(TAG, "Выбранный файл из галереи: $file")
+            Log.i(TAG, "Выбранный файл из галереи: $myImage")
 
             val ftpClient = FTPClient()
             thread {
                 try {
                     connectFTP(ftpClient)
                     Log.i(TAG, "CONNECTED")
-                    val dirPath = "./z96082yn.beget.tech/public_html"
+                    val dirPath = "./www/tanya.ru"
 
                     var filea: File = File("/storage/emulated/0/DCIM/fg/resizeq.jpg")
                     val os: OutputStream = BufferedOutputStream(FileOutputStream(filea))
@@ -254,8 +255,9 @@ class MainActivity : AppCompatActivity(){
     }
 
     fun connectFTP(ftpClient: FTPClient){
-        ftpClient.connect("z96082yn.beget.tech")
-        ftpClient.login("z96082yn", "XTYSDbPI")
+        ftpClient.connect("91.236.136.123")
+        ftpClient.login("u724370", "3H0j9U2s")
+        ftpClient.setFileType(FTP.BINARY_FILE_TYPE)
         ftpClient.enterLocalPassiveMode()
     }
 
