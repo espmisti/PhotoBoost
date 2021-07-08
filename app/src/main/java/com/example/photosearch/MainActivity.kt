@@ -1,6 +1,7 @@
 package com.example.photosearch
 
 import android.Manifest
+import android.R.attr.key
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
@@ -31,11 +32,12 @@ import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.coroutines.*
 import org.apache.commons.net.ftp.FTP
 import org.apache.commons.net.ftp.FTPClient
-import retrofit2.Retrofit
-import retrofit2.awaitResponse
-import retrofit2.converter.gson.GsonConverterFactory
+//import retrofit2.Retrofit
+//import retrofit2.awaitResponse
+//import retrofit2.converter.gson.GsonConverterFactory
 import java.io.*
 import java.io.File
+import java.text.DateFormat
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.*
@@ -43,6 +45,7 @@ import kotlin.collections.HashMap
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.concurrent.thread
+
 
 class MainActivity : AppCompatActivity(){
 
@@ -56,7 +59,14 @@ class MainActivity : AppCompatActivity(){
     private val REQUEST_CODE_GALLERY = 1
     private val REQUEST_CODE_CAMERA = 2
 
+    private val SERVER_IP = "91.236.136.123"
+    private val SERVER_USERNAME = "u724370"
+    private val SERVER_PASSWORD = "3H0j9U2s"
 
+    private val SERVER_DIR = "./www/tanya.ru"
+
+    val ftp: ftp_client = ftp_client()
+    var fileURL = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,6 +92,8 @@ class MainActivity : AppCompatActivity(){
         btnSearch.setOnClickListener {
 // openGalleryForImage()
             openDialog()
+            //urlGet()
+
 // var intent = Intent(this, PhotoWebViewActivity::class.java)
 // startActivity(intent)
         }
@@ -90,19 +102,6 @@ class MainActivity : AppCompatActivity(){
         bottonNavigatorView.background = null
         floatbar_bg.isEnabled = false
 
-
-
-
-
-
-// btnChoosePlan.setOnClickListener{
-// startActivity(Intent(this, PhotoWebViewActivity::class.java))
-// }
-
-// btnHistory.setOnClickListener {
-// startActivity(Intent(this, HistoryActivity::class.java))
-// finish()
-// }
         bottonNavigatorView.setOnNavigationItemSelectedListener{
             item -> when (item.itemId){
                 R.id.mPremium ->{
@@ -123,141 +122,58 @@ class MainActivity : AppCompatActivity(){
     private fun openGalleryForImage() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
-        startActivityForResult(intent, 1)
+        startActivityForResult(intent, REQUEST_CODE_GALLERY)
     }
-    val CAMERA_REQUEST = 64
     private fun photograph(){
         try{
             val i: Intent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(i, CAMERA_REQUEST)
+            startActivityForResult(i, REQUEST_CODE_CAMERA)
         } catch (e: ActivityNotFoundException){
             Log.e(TAG, "photograph: $e")
             Toast.makeText(this, "Ваше приложение временно не поддерживать поиск через камеру!", Toast.LENGTH_SHORT).show()
         }
-
     }
-//    private fun generateFileUri(type: Int): Uri? {
-//        var file: File? = null
-//        when (type) {
-//            TYPE_PHOTO -> file = File(
-//                directory.getPath().toString() + "/" + "photo_"
-//                        + System.currentTimeMillis() + ".jpg"
-//            )
-//            TYPE_VIDEO -> file = File(
-//                (directory.getPath().toString() + "/" + "video_"
-//                        + System.currentTimeMillis() + ".mp4")
-//            )
-//        }
-//        Log.d(TAG, "fileName = $file")
-//        return Uri.fromFile(file)
-//    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK){
+        if(requestCode == REQUEST_CODE_CAMERA && resultCode == Activity.RESULT_OK){
             //val myImage = File(getPath(data?.data))
             var bit: Bitmap = data?.extras?.get("data") as Bitmap
             val ftpClient = FTPClient()
             thread {
                 try{
-                    connectFTP(ftpClient)
-                    Log.i(TAG, "CONNECTED")
-                    val dirPath = "./www/tanya.ru"
-
-                    val filea: File = File("/storage/emulated/0/DCIM/fg/photo.jpg")
-                    val os: OutputStream = BufferedOutputStream(FileOutputStream(filea))
-                    //bit = Bitmap.createScaledBitmap(bit, 800, 1000, false)
+                    ftp.connect(SERVER_IP, SERVER_USERNAME, SERVER_PASSWORD)
+                    val fileName = generateFileName()
+                    val file = File("/storage/emulated/0/DCIM/fg/$fileName.jpg")
+                    val os: OutputStream = BufferedOutputStream(FileOutputStream(file))
                     bit.compress(Bitmap.CompressFormat.JPEG, 100, os)
-                    os.close()
-                    val inputStream: InputStream = FileInputStream("/storage/emulated/0/DCIM/fg/photo.jpg")
-                    Log.i(TAG, "file: $dirPath/${filea.name}")
-                    ftpClient.storeFile("$dirPath/${filea.name}", inputStream)
-                    inputStream.close()
+                    os.close();
+                    ftp.upload("$SERVER_DIR/${file.name}", "/storage/emulated/0/DCIM/fg/$fileName.jpg", this)
 
-                    ftpClient.logout()
-                    ftpClient.disconnect()
-                    Log.i(TAG, "DISCONNECTED")
-
-
-                } catch (e: java.lang.Exception){
+                    ftp.disconnect()
+                } catch (e: Exception){
                     e.printStackTrace()
-                    Log.e(TAG, "onActivityResult, thread: $e", )
+                    Log.e(TAG, "onActivityResult, thread: $e")
                 }
             }
         }
-        if (resultCode == Activity.RESULT_OK && requestCode == 1){
-            val file = File(getPath(data?.data))
-//            var bitmap: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uriImage)
-            val myImage = File(getPath(data?.data))
-            val uriImage: Uri? = data?.data
-            var bitmap: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uriImage)
-
-            Log.i(TAG, "${data?.data} ")
-            Log.i(TAG, "Выбранный файл из галереи: $file")
-
-            val bytes = File(getPath(data?.data)).readBytes()
-            val base64 = Base64.getEncoder().encodeToString(bytes)
-            Log.i(TAG, "длина ебучей base64: ${base64.length}")
-
-//            getCurrentData(base64)
-
-
-//            thread {
-//                try {
-//                    val con: HttpURLConnection = URL("https://data.av100.ru/socialapi.ashx").openConnection() as HttpURLConnection
-//
-//                    con.requestMethod = RequestMethod.POST.toString()
-//                    con.setRequestProperty("Content-Type", "multipart/form-data")
-//                    con.doOutput = true
-//
-//                    val data = "key=e9b9368f-0f87-4bfd-baab-e40ba235ec85&method=byphoto&img=data:image/png;base64$base64"
-//                    val wr = DataOutputStream(con.outputStream)
-//                    wr.writeChars(data)
-//                    wr.flush()
-//
-//                    val `in` = BufferedReader(InputStreamReader(con.inputStream))
-//                    var inputLine: String?
-//                    val response = StringBuffer()
-//
-//                    while (`in`.readLine().also { inputLine = it } != null) {
-//                        response.append(inputLine)
-//                    }
-//                    Log.i(TAG, "response: $response")
-//                } catch (e: Exception) {
-//                    e.printStackTrace()
-//                    Log.i(TAG, "с апи http прикол: $e")
-//                }
-//            }
-
-            val ftpClient = FTPClient()
+        if (requestCode == REQUEST_CODE_GALLERY && resultCode == Activity.RESULT_OK){
             thread {
                 try {
-                    connectFTP(ftpClient)
-                    Log.i(TAG, "CONNECTED")
-                    val dirPath = "./www/tanya.ru"
-
-                    var filea: File = File("/storage/emulated/0/DCIM/fg/resizeq.jpg")
-                    val os: OutputStream = BufferedOutputStream(FileOutputStream(filea))
-                    bitmap = Bitmap.createScaledBitmap(bitmap, 400, 600, false)
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os)
-                    os.close();
-
-                    val file = myImage
-                    Log.i(TAG, "file: $filea")
-
-
-                    val inputStream: InputStream = FileInputStream(file)
-
-                    Log.i(TAG, "twetwetwet: $$dirPath/${file.name}")
-                    ftpClient.storeFile("$dirPath/${file.name}", inputStream)
-                    inputStream.close()
-//END OF FILE UPLOADING
-                    ftpClient.logout()
-                    ftpClient.disconnect()
-                    Log.i(TAG, "DISCONNECTED")
+                    dialogChoose.dismiss()
+                    ftp.connect(SERVER_IP, SERVER_USERNAME, SERVER_PASSWORD)
+                    val fileName = generateFileName()
+                    val file = File("/storage/emulated/0/DCIM/fg/$fileName.jpg")
+                    compressImage(file, data?.data)
+                    Log.i(TAG, "onActivityResult: $SERVER_DIR/${file.name}")
+                    ftp.upload("$SERVER_DIR/${file.name}", "/storage/emulated/0/DCIM/fg/$fileName.jpg", this)
+                    fileURL = file.name
+                    urlGet()
+                    ftp.disconnect()
+                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, WebViewFragment()).commit()
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    Log.i(TAG, "ты тупой еблан $e")
+                    Log.e(TAG, "onActivityResult photochoose: ", e)
                 }
             }
         }
@@ -274,34 +190,34 @@ class MainActivity : AppCompatActivity(){
         return s
     }
 
-    private fun getCurrentData(imageBase64: String) {
-
-        try {
-            val api = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(ApiRequests::class.java)
-
-            GlobalScope.launch(Dispatchers.IO) {
-                try {
-                    val response = api.getUsers("penis").awaitResponse()
-                    if (response.isSuccessful) {
-
-                        val data = response.body()!!
-                        Log.i(TAG, data.toString())
-
-                    }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    Log.i(TAG, "getCurrentData: $e")
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            Log.i(TAG, "У ТЕБЯ ОШИБКА В АПИ ОСЛИНА ИДИ НАХУЙ: $e")
-        }
-    }
+//    private fun getCurrentData(imageBase64: String) {
+//
+//        try {
+//            val api = Retrofit.Builder()
+//                .baseUrl(BASE_URL)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build()
+//                .create(ApiRequests::class.java)
+//
+//            GlobalScope.launch(Dispatchers.IO) {
+//                try {
+//                    val response = api.getUsers("penis").awaitResponse()
+//                    if (response.isSuccessful) {
+//
+//                        val data = response.body()!!
+//                        Log.i(TAG, data.toString())
+//
+//                    }
+//                } catch (e: Exception) {
+//                    e.printStackTrace()
+//                    Log.i(TAG, "getCurrentData: $e")
+//                }
+//            }
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//            Log.i(TAG, "У ТЕБЯ ОШИБКА В АПИ ОСЛИНА ИДИ НАХУЙ: $e")
+//        }
+//    }
 
     private val REQUEST_CODE_ASK_PERMISSIONS = 123
 
@@ -313,22 +229,29 @@ class MainActivity : AppCompatActivity(){
         }
         openGalleryForImage()
     }
-//    private val MY_CAMERA_PERMISSION_CODE = 100
-////    fun toPhotograph(){
-////        val hasWriteContactsPermission = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-////        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
-////            requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), MY_CAMERA_PERMISSION_CODE)
-////            return
-////        }
-////        openGalleryForImage()
-////
-////        var photo = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-////        if(photo.resolveActivity(this.packageManager) != null){
-////            startActivityForResult(photo, REQUEST_CODE_ASK_PERMISSIONS)
-////        } else {
-////            Toast.makeText(this, "Негры", Toast.LENGTH_SHORT).show()
-////        }
-//    }
+
+    private fun compressImage(file: File, uri: Uri?) : File? {
+        try{
+            val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
+            val os: OutputStream = BufferedOutputStream(FileOutputStream(file))
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, os)
+            os.close();
+            return file
+        } catch (e: Exception){
+            e.printStackTrace()
+            Log.e(TAG, "compressImage method: ", e)
+        }
+        return null
+    }
+
+    private fun generateFileName() : String {
+        val currentDate: Date = Date()
+        val dateFormat: DateFormat = SimpleDateFormat("ddmmyyyy", Locale.getDefault())
+        val timeFormat: DateFormat = SimpleDateFormat("HHmmss", Locale.getDefault())
+        val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')
+        val resultGenerator = (1..20).map { allowedChars.random() }.joinToString("")
+        return dateFormat.format(currentDate) + "_" + timeFormat.format(currentDate) + "_" + resultGenerator
+    }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -345,6 +268,9 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
+    fun urlGet() : String{
+        return fileURL
+    }
     fun connectFTP(ftpClient: FTPClient){
         ftpClient.connect("91.236.136.123")
         ftpClient.login("u724370", "3H0j9U2s")
@@ -410,13 +336,65 @@ class MainActivity : AppCompatActivity(){
 
 
 
+
+
     // <- Кнопки в диалоге -> //
 
     fun closeDialog(view: View) { dialogChoose.dismiss() }          // button for close dialog
     fun chooseImageDialog(view: View) { insertPhoto() }             // button for choose photo from the gallery
-    fun photoCameraDialog(view: View) { photograph() }            // button for open camera
+    fun photoCameraDialog(view: View) { photograph() }              // button for open camera
 
     // <-                  -> //
 
+
+
+
+
+    // залупа
+//    if (resultCode == Activity.RESULT_OK && requestCode == 1){
+//        val file = File(getPath(data?.data))
+////            var bitmap: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uriImage)
+//        val myImage = File(getPath(data?.data))
+//        val uriImage: Uri? = data?.data
+//        var bitmap: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uriImage)
+//
+//        Log.i(TAG, "${data?.data} ")
+//        Log.i(TAG, "Выбранный файл из галереи: $file")
+//
+//        val bytes = File(getPath(data?.data)).readBytes()
+//        val base64 = Base64.getEncoder().encodeToString(bytes)
+//        Log.i(TAG, "длина ебучей base64: ${base64.length}")
+//
+////            getCurrentData(base64)
+//
+//
+////            thread {
+////                try {
+////                    val con: HttpURLConnection = URL("https://data.av100.ru/socialapi.ashx").openConnection() as HttpURLConnection
+////
+////                    con.requestMethod = RequestMethod.POST.toString()
+////                    con.setRequestProperty("Content-Type", "multipart/form-data")
+////                    con.doOutput = true
+////
+////                    val data = "key=e9b9368f-0f87-4bfd-baab-e40ba235ec85&method=byphoto&img=data:image/png;base64$base64"
+////                    val wr = DataOutputStream(con.outputStream)
+////                    wr.writeChars(data)
+////                    wr.flush()
+////
+////                    val `in` = BufferedReader(InputStreamReader(con.inputStream))
+////                    var inputLine: String?
+////                    val response = StringBuffer()
+////
+////                    while (`in`.readLine().also { inputLine = it } != null) {
+////                        response.append(inputLine)
+////                    }
+////                    Log.i(TAG, "response: $response")
+////                } catch (e: Exception) {
+////                    e.printStackTrace()
+////                    Log.i(TAG, "с апи http прикол: $e")
+////                }
+////            }
+//
+//        val ftpClient = FTPClient()
 
 }

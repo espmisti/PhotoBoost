@@ -3,7 +3,6 @@ package com.example.photosearch
 import android.app.DownloadManager
 import android.content.SharedPreferences
 import android.content.pm.ApplicationInfo
-import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
