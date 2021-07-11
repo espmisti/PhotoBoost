@@ -58,11 +58,11 @@ class MainActivity : AppCompatActivity(){
     private val REQUEST_CODE_GALLERY = 1
     private val REQUEST_CODE_CAMERA = 2
 
-    private val SERVER_IP = "91.236.136.123"
-    private val SERVER_USERNAME = "u724370"
-    private val SERVER_PASSWORD = "3H0j9U2s"
+    private val SERVER_IP = "z96082yn.beget.tech"
+    private val SERVER_USERNAME = "z96082yn"
+    private val SERVER_PASSWORD = "XTYSDbPI"
 
-    private val SERVER_DIR = "./www/tanya.ru"
+    private val SERVER_DIR = "z96082yn.beget.tech/public_html"
 
     private val ftp = ftp_client()
     var fileURL = ""
@@ -187,7 +187,6 @@ class MainActivity : AppCompatActivity(){
                         Log.i(TAG, "onActivityResult: ${cameraImage}")
                         var base64ImageString = encoder(cameraImage)
                         base64ImageString = URLEncoder.encode(base64ImageString, "UTF-8")
-
                         doApiRequest(base64ImageString)
                         ftp.disconnect()
                         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, WebViewFragment()).commit()
