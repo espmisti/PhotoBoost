@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/btnYandex"
+            android:id="@+id/webview_button_yandex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -28,7 +28,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/btnGoogle"
+            android:id="@+id/webview_button_google"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -39,7 +39,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/btnTinEye"
+            android:id="@+id/webview_button_tineye"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -50,7 +50,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/btnPremiunSearch"
+            android:id="@+id/webview_button_premium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -62,7 +62,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/line"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
@@ -71,12 +71,12 @@
         app:srcCompat="@drawable/line" />
 
     <WebView
-        android:id="@+id/mWebView"
+        android:id="@+id/webview_webview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/line" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,7 +26,7 @@ class PhotoWebViewActivity : AppCompatActivity() {
         setContentView(R.layout.activity_photo_web_view)
 
         var uriImage = intent.getStringExtra("uri")
-        // yandex search = https://yandex.ru/images/search?rpt=imageview&url=https://mykaleidoscope.ru/uploads/posts/2020-01/1579886452_38-p-kapkeiki-66.jpg
+        // yandex search = https://yandex.ru/images/search?rpt=imageview&url=http://copp63.ru/images/promo.svg?2232323
 
         shared = getSharedPreferences("APP", MODE_PRIVATE)
         if (isNetworkConnected) {
@@ -52,21 +52,21 @@ class PhotoWebViewActivity : AppCompatActivity() {
             }
         }
         CookieManager.getInstance().setAcceptCookie(true)
-        mWebView.setWebViewClient(MyWebViewClient(this@PhotoWebViewActivity))
-        mWebView.settings.javaScriptEnabled = true
-        mWebView.settings.loadWithOverviewMode = true //loads the WebView completely zoomed out
-        mWebView.settings.useWideViewPort =
+        webview_webview.setWebViewClient(MyWebViewClient(this@PhotoWebViewActivity))
+        webview_webview.settings.javaScriptEnabled = true
+        webview_webview.settings.loadWithOverviewMode = true //loads the WebView completely zoomed out
+        webview_webview.settings.useWideViewPort =
             true //makes the Webview have a normal viewport (such as a normal desktop browser), while when false the webview will have a viewport constrained to its own dimensions (so if the webview is 50px*50px the viewport will be the same size)
-        mWebView.getSettings().setSupportZoom(true)
-        mWebView.getSettings().builtInZoomControls = true //to remove the zoom buttons in webview
-        mWebView.getSettings().displayZoomControls = false //to remove the zoom buttons in webview
-        mWebView.getSettings().domStorageEnabled = true
-        mWebView.getSettings().setAppCacheEnabled(true)
-        mWebView.getSettings().loadsImagesAutomatically = true
+        webview_webview.getSettings().setSupportZoom(true)
+        webview_webview.getSettings().builtInZoomControls = true //to remove the zoom buttons in webview
+        webview_webview.getSettings().displayZoomControls = false //to remove the zoom buttons in webview
+        webview_webview.getSettings().domStorageEnabled = true
+        webview_webview.getSettings().setAppCacheEnabled(true)
+        webview_webview.getSettings().loadsImagesAutomatically = true
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mWebView.getSettings().mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+            webview_webview.getSettings().mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
         }
-        mWebView.setDownloadListener(DownloadListener { url, userAgent, contentDisposition, mimetype, contentLength ->
+        webview_webview.setDownloadListener(DownloadListener { url, userAgent, contentDisposition, mimetype, contentLength ->
             val request = DownloadManager.Request(Uri.parse(url))
             request.setMimeType(mimetype)
             val cookies = CookieManager.getInstance().getCookie(url)
@@ -96,16 +96,16 @@ class PhotoWebViewActivity : AppCompatActivity() {
             }
         })
         if (!TEST_STRING.isEmpty()) {
-            mWebView.loadUrl(url_site)
+            webview_webview.loadUrl(url_site)
             TEST_STRING = url_site
         } else {
-            mWebView.loadUrl(shared!!.getString("url", "")!!)
+            webview_webview.loadUrl(shared!!.getString("url", "")!!)
         }
     }
 
     override fun onBackPressed() {
-        if (mWebView!!.canGoBack()) {
-            mWebView!!.goBack()
+        if (webview_webview!!.canGoBack()) {
+            webview_webview!!.goBack()
         } else {
             super.onBackPressed()
         }
@@ -113,41 +113,41 @@ class PhotoWebViewActivity : AppCompatActivity() {
 
     // меняет цвет активной кнопки и цвета неактивных
     private fun navigationButtons() {
-        btnYandex.setOnClickListener {
-            btnYandex.setTextColor(getColor(R.color.active_search_service))
+        webview_button_yandex.setOnClickListener {
+            webview_button_yandex.setTextColor(getColor(R.color.active_search_service))
             initView("https://yandex.ru/images/search")
             //
-            btnGoogle.setTextColor(getColor(R.color.unactive_search_service))
-            btnTinEye.setTextColor(getColor(R.color.unactive_search_service))
-            btnPremiunSearch.setTextColor(getColor(R.color.unactive_search_service))
+            webview_button_google.setTextColor(getColor(R.color.unactive_search_service))
+            webview_button_tineye.setTextColor(getColor(R.color.unactive_search_service))
+            webview_button_premium.setTextColor(getColor(R.color.unactive_search_service))
         }
 
-        btnGoogle.setOnClickListener {
-            btnYandex.setTextColor(getColor(R.color.unactive_search_service))
+        webview_button_google.setOnClickListener {
+            webview_button_yandex.setTextColor(getColor(R.color.unactive_search_service))
             //
-            btnGoogle.setTextColor(getColor(R.color.active_search_service))
+            webview_button_google.setTextColor(getColor(R.color.active_search_service))
             initView("https://images.google.ru/")
             //
-            btnTinEye.setTextColor(getColor(R.color.unactive_search_service))
-            btnPremiunSearch.setTextColor(getColor(R.color.unactive_search_service))
+            webview_button_tineye.setTextColor(getColor(R.color.unactive_search_service))
+            webview_button_premium.setTextColor(getColor(R.color.unactive_search_service))
         }
 
-        btnTinEye.setOnClickListener {
-            btnYandex.setTextColor(getColor(R.color.unactive_search_service))
-            btnGoogle.setTextColor(getColor(R.color.unactive_search_service))
+        webview_button_tineye.setOnClickListener {
+            webview_button_yandex.setTextColor(getColor(R.color.unactive_search_service))
+            webview_button_google.setTextColor(getColor(R.color.unactive_search_service))
             //
-            btnTinEye.setTextColor(getColor(R.color.active_search_service))
+            webview_button_tineye.setTextColor(getColor(R.color.active_search_service))
             initView("https://tineye.com/")
             //
-            btnPremiunSearch.setTextColor(getColor(R.color.unactive_search_service))
+            webview_button_premium.setTextColor(getColor(R.color.unactive_search_service))
         }
 
-        btnPremiunSearch.setOnClickListener {
-            btnYandex.setTextColor(getColor(R.color.unactive_search_service))
-            btnGoogle.setTextColor(getColor(R.color.unactive_search_service))
-            btnTinEye.setTextColor(getColor(R.color.unactive_search_service))
+        webview_button_premium.setOnClickListener {
+            webview_button_yandex.setTextColor(getColor(R.color.unactive_search_service))
+            webview_button_google.setTextColor(getColor(R.color.unactive_search_service))
+            webview_button_tineye.setTextColor(getColor(R.color.unactive_search_service))
             //
-            btnPremiunSearch.setTextColor(getColor(R.color.active_search_service))
+            webview_button_premium.setTextColor(getColor(R.color.active_search_service))
             initView("https://vk.com/negrimama")
         }
     }

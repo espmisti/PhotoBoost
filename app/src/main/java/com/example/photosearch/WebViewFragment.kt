@@ -19,10 +19,10 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_photo_web_view.*
 import kotlinx.android.synthetic.main.fragment_web_view.view.*
 
-
 class WebViewFragment : Fragment() {
     var TEST_STRING = "https://yandex.ru/images/search"
     var SERVER_URL = "https://u724370.com4.ru/"
+    val TAG = "webview"
     private var shared: SharedPreferences? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,49 +34,53 @@ class WebViewFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_web_view, container, false)
         val activity: MainActivity? = activity as MainActivity?
-        val resutl: String? = activity?.urlGet()
-        Log.i("toosodo", "onCreateView: $resutl")
-        view.btnYandex.setOnClickListener {
-            buttonNavigation(btnYandex, btnPremiunSearch, btnGoogle, btnTinEye)
-            initView("https://yandex.ru/images/search?rpt=imageview&url=$SERVER_URL$resutl")
+        val result: String? = activity?.urlGet()
+        view.webview_button_yandex.setOnClickListener {
+            buttonNavigation(webview_button_yandex, webview_button_premium, webview_button_google, webview_button_tineye)
+            initView("https://yandex.ru/images/search?rpt=imageview&url=$SERVER_URL$result")
+            Log.i(TAG, "url yandex: https://yandex.ru/images/search?rpt=imageview&url=$SERVER_URL$result")
         }
-        view.btnGoogle.setOnClickListener {
-            buttonNavigation(btnGoogle, btnYandex, btnPremiunSearch, btnTinEye)
-            initView("https://images.google.com/searchbyimage?image_url=$SERVER_URL$resutl")
+        view.webview_button_google.setOnClickListener {
+            buttonNavigation(webview_button_google, webview_button_yandex, webview_button_premium, webview_button_tineye)
+            initView("https://images.google.com/searchbyimage?image_url=$SERVER_URL$result")
+            Log.i(TAG, "url google: https://images.google.com/searchbyimage?image_url=$SERVER_URL$result")
         }
-        view.btnTinEye.setOnClickListener {
-            buttonNavigation(btnTinEye, btnYandex, btnGoogle, btnPremiunSearch)
+        view.webview_button_tineye.setOnClickListener {
+            buttonNavigation(webview_button_tineye, webview_button_yandex, webview_button_google, webview_button_premium)
             initView("https://tineye.com/")
         }
-        view.btnPremiunSearch.setOnClickListener {
-            buttonNavigation(btnPremiunSearch, btnYandex, btnGoogle, btnTinEye)
-            initView("https://vk.com/negrimama")
+        view.webview_button_premium.setOnClickListener {
+            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragment_container, PremiumSearchFragment())?.commit()
+            buttonNavigation(webview_button_premium, webview_button_yandex, webview_button_google, webview_button_tineye)
+            //initView("https://vk.com/negrimama")
         }
         return view
     }
 
     private fun initView(url_site: String) {
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             if (0 != requireActivity().applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) {
                 WebView.setWebContentsDebuggingEnabled(true)
             }
         }
         CookieManager.getInstance().setAcceptCookie(true)
-        mWebView.setWebViewClient(MyWebViewClient(activity))
-        mWebView.settings.javaScriptEnabled = true
-        mWebView.settings.loadWithOverviewMode = true //loads the WebView completely zoomed out
-        mWebView.settings.useWideViewPort =
-            true //makes the Webview have a normal viewport (such as a normal desktop browser), while when false the webview will have a viewport constrained to its own dimensions (so if the webview is 50px*50px the viewport will be the same size)
-        mWebView.getSettings().setSupportZoom(true)
-        mWebView.getSettings().builtInZoomControls = true //to remove the zoom buttons in webview
-        mWebView.getSettings().displayZoomControls = false //to remove the zoom buttons in webview
-        mWebView.getSettings().domStorageEnabled = true
-        mWebView.getSettings().setAppCacheEnabled(true)
-        mWebView.getSettings().loadsImagesAutomatically = true
+        webview_webview.setWebViewClient(MyWebViewClient(activity))
+        webview_webview.settings.javaScriptEnabled = true
+        webview_webview.settings.loadWithOverviewMode = true //loads the WebView completely zoomed out
+        webview_webview.settings.useWideViewPort = true //makes the Webview have a normal viewport (such as a normal desktop browser), while when false the webview will have a viewport constrained to its own dimensions (so if the webview is 50px*50px the viewport will be the same size)
+        webview_webview.getSettings().setSupportZoom(true)
+        webview_webview.getSettings().builtInZoomControls = true //to remove the zoom buttons in webview
+        webview_webview.getSettings().displayZoomControls = false //to remove the zoom buttons in webview
+        webview_webview.getSettings().domStorageEnabled = true
+        webview_webview.getSettings().setAppCacheEnabled(true)
+        webview_webview.getSettings().loadsImagesAutomatically = true
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mWebView.getSettings().mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+            webview_webview.getSettings().mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
         }
-        mWebView.setDownloadListener(DownloadListener { url, userAgent, contentDisposition, mimetype, contentLength ->
+
+        webview_webview.setDownloadListener(DownloadListener { url, userAgent, contentDisposition, mimetype, contentLength ->
             val request = DownloadManager.Request(Uri.parse(url))
             request.setMimeType(mimetype)
             val cookies = CookieManager.getInstance().getCookie(url)
@@ -106,10 +110,10 @@ class WebViewFragment : Fragment() {
             }
         })
         if (!TEST_STRING.isEmpty()) {
-            mWebView.loadUrl(url_site)
+            webview_webview.loadUrl(url_site)
             TEST_STRING = url_site
         } else {
-            mWebView.loadUrl(shared!!.getString("url", "")!!)
+            webview_webview.loadUrl(shared!!.getString("url", "")!!)
         }
     }
 

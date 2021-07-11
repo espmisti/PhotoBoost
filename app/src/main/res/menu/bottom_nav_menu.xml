@@ -9,5 +9,4 @@
     <item android:id="@+id/mMenu"
         android:title="Перейти в меню"
         android:icon="@drawable/ic_menu" />
-
 </menu>
