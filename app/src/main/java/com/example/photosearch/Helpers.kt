@@ -13,23 +13,22 @@ object Helpers {
         try {
             var link = url
             val constructor = StringBuilder()
-//            val keys: Array<Any> = parameters.keys.toTypedArray() as Any
+// val keys: Array<Any> = parameters.keys.toTypedArray() as Any
             for (i in parameters) {
                 constructor.append(parameters.keys.first())
                 constructor.append("=")
                 constructor.append(parameters.getValue(parameters.keys.first()))
                 constructor.append("&")
             }
-//            Log.i(TAG, "makeRequest: $constructor")
+// Log.i(TAG, "makeRequest: $constructor")
             if (method == RequestMethod.GET) link += "?$constructor"
             val connection = URL(link).openConnection() as HttpURLConnection
             connection.requestMethod = method.toString()
-            connection.setRequestProperty("Accept", "*/*")
-            connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=???")
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded")
             connection.doOutput = true
             connection.doInput = true
             if (method != RequestMethod.GET) {
-                connection.outputStream.write(constructor.toString().byteInputStream().readBytes())
+                connection.outputStream.write(constructor.toString().toByteArray())
             }
             Log.i(TAG, "responseCode: ${connection.responseCode}")
             Log.i(TAG, "responseMessage: ${connection.responseMessage}")
