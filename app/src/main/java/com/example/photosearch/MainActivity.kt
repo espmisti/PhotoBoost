@@ -65,7 +65,8 @@ class MainActivity : AppCompatActivity(){
 
     private val ftp = ftp_client()
     var fileURL = ""
-    private var mImageUri: URI? = null
+
+    var result: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -159,7 +160,7 @@ class MainActivity : AppCompatActivity(){
 
     }
 
-    var result: String? = null
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

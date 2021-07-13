@@ -103,10 +103,10 @@ class PremiumSearchFragment : Fragment(), OnUserClickListener {
                     val name = docBanned.select("div[class=page_top]").select("h1").text()
                     var user = OneVkUser(getBitmapFromURL(imageUrl), bannedStatus,  name, userUrl)
                     resultListUsers.add(user)
-                    Log.i(TAG, "getVkUsers: ${user!!.name}")
-                    Log.i(TAG, "getVkUsers: ${user!!.bannedStatus}")
-                    Log.i(TAG, "getVkUsers: ${user!!.bitmap}")
-                    Log.i(TAG, "getVkUsers: ${user!!.userUrl}")
+                    Log.i(TAG, "getVkUsers: ${user.name}")
+                    Log.i(TAG, "getVkUsers: ${user.bannedStatus}")
+                    Log.i(TAG, "getVkUsers: ${user.bitmap}")
+                    Log.i(TAG, "getVkUsers: ${user.userUrl}")
                     Log.i(TAG, "------------------------------------")
                 }
             }
