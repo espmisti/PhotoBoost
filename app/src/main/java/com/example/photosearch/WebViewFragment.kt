@@ -54,6 +54,10 @@ class WebViewFragment : Fragment() {
             buttonNavigation(webview_button_premium, webview_button_yandex, webview_button_google, webview_button_tineye)
             //initView("https://vk.com/negrimama")
         }
+
+        val myDataFromActivity: String? = activity!!.getMyData()
+        Toast.makeText(context, "$myDataFromActivity", Toast.LENGTH_SHORT).show()
+
         return view
     }
 

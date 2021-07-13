@@ -1,11 +1,10 @@
 package com.example.photosearch
 
 import android.Manifest
-import android.R.attr.key
 import android.app.Activity
 import android.app.Dialog
-import android.content.Context
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -33,12 +32,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.coroutines.*
-import org.apache.commons.net.ftp.FTP
 import org.apache.commons.net.ftp.FTPClient
 import java.io.*
 import java.io.File
-import java.net.URLEncoder
 import java.net.URI
+import java.net.URLEncoder
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -157,13 +155,10 @@ class MainActivity : AppCompatActivity(){
     }
 
     private fun doApiRequest(base64ImageString: String) {
-        thread {
-            val params: HashMap<String, String> = HashMap()
-            params["img"] = base64ImageString
-            val result = makeRequest(Helpers.link, Helpers.RequestMethod.POST, params)
-            Log.i(TAG, "json ответ: $result")
-        }
+
     }
+
+    var result: String? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -181,6 +176,9 @@ class MainActivity : AppCompatActivity(){
                         ftp.upload("$SERVER_DIR/$fileName.jpg", file.toString(), this)
                         fileURL = "$fileName.jpg"
                         urlGet()
+                        ftp.disconnect()
+
+                        // api
                         val bitmap = BitmapFactory.decodeFile(file.getAbsolutePath())
                         val uriCameraImage = bitmapToUri(bitmap).toString()
                         val cameraImage = uriCameraImage.substring(8, uriCameraImage.length)
@@ -188,8 +186,16 @@ class MainActivity : AppCompatActivity(){
                         var base64ImageString = encoder(cameraImage)
                         base64ImageString = URLEncoder.encode(base64ImageString, "UTF-8")
 
-                        doApiRequest(base64ImageString)
-                        ftp.disconnect()
+                        var result: String?
+                        try {
+                            val params: HashMap<String, String> = HashMap()
+                            params["img"] = base64ImageString
+                            result = makeRequest(Helpers.link, Helpers.RequestMethod.POST, params)
+                            Log.i(TAG, "json ответ: $result")
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                            Log.i(TAG, "onActivityResult: $e")
+                        }
                         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, WebViewFragment()).commit()
                     } catch (e: Exception){
                         e.printStackTrace()
@@ -212,11 +218,22 @@ class MainActivity : AppCompatActivity(){
                     ftp.upload("$SERVER_DIR/$fileName.jpg", getPath(data?.data).toString(), this)
                     fileURL = "$fileName.jpg"
                     urlGet()
+                    ftp.disconnect()
+
+                    // api
                     var base64ImageString = encoder(getPath(data?.data).toString())
                     base64ImageString = URLEncoder.encode(base64ImageString, "UTF-8")
 
-                    doApiRequest(base64ImageString)
-                    ftp.disconnect()
+                    try {
+                        val params: HashMap<String, String> = HashMap()
+                        params["img"] = base64ImageString
+                        result = makeRequest(Helpers.link, Helpers.RequestMethod.POST, params)
+                        Log.i(TAG, "json ответ: $result")
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        Log.i(TAG, "onActivityResult: $e")
+                    }
+
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_container, WebViewFragment()).commit()
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -225,6 +242,10 @@ class MainActivity : AppCompatActivity(){
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    fun getMyData(): String? {
+        return result
     }
 
     private fun createTemporaryFile(part: String, ext: String): File? {

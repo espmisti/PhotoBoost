@@ -16,12 +16,12 @@
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar.Bridge">
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".LoadingActivity"/>
         <activity android:name=".PhotoWebViewActivity" />
         <activity android:name=".FirstLaunch3Activity" />
         <activity android:name=".FirstLaunch2Activity" />
         <activity android:name=".FirstLaunch1Activity" />
-        <activity android:name=".LoadingActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
