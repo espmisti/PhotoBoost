@@ -28,6 +28,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.example.photosearch.Helpers.makeRequest
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog.*
@@ -45,7 +46,7 @@ import kotlin.collections.HashMap
 import kotlin.concurrent.thread
 
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity(), Communicator {
 
     private val REQUEST_CODE = 42
     val TAG = "eblan"
@@ -338,6 +339,20 @@ class MainActivity : AppCompatActivity(){
     fun closeDialog(view: View) { dialogChoose.dismiss() }          // button for close dialog
     fun chooseImageDialog(view: View) { openGalleryForImage() }             // button for choose photo from the gallery
     fun photoCameraDialog(view: View) { openCameraForImage() }              // button for open camera
+
+    override fun passDataCom(url: String) {
+        val bundle = Bundle()
+        bundle.putString("url", url)
+
+        val transaction = this.supportFragmentManager.beginTransaction()
+        val frag2 = UserWebViewFragment()
+        frag2.arguments = bundle
+
+        transaction.replace(R.id.fragment_container, frag2)
+        transaction.addToBackStack(null)
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        transaction.commit()
+    }
     // <-                  -> //
 
 

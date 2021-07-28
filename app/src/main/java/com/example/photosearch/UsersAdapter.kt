@@ -32,10 +32,7 @@ class UsersAdapter(private val users: ArrayList<OneVkUser>, private val onUserCl
         val user = users[position]
 
         holder.textName.text = user.name
-        if (user.bannedStatus)
-            holder.image.setImageResource(R.drawable.banned)
-        else
-            holder.image.setImageBitmap(user.bitmap)
+        holder.image.setImageBitmap(user.bitmap)
 
         holder.textOpenProfile.setOnClickListener {
             onUserClickListener.onUserClickListener(position)
