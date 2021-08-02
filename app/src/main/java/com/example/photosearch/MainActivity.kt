@@ -7,6 +7,7 @@ import android.app.Dialog
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -21,6 +22,9 @@ import android.os.StrictMode.VmPolicy
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -31,6 +35,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.photosearch.Helpers.makeRequest
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_photo_web_view.*
 import kotlinx.android.synthetic.main.dialog.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.coroutines.*
@@ -67,6 +72,7 @@ class MainActivity : AppCompatActivity(), Communicator {
     private val ftp = ftp_client()
     var fileURL = ""
 
+    lateinit var sp: SharedPreferences
     var result: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,7 +91,6 @@ class MainActivity : AppCompatActivity(), Communicator {
             openDialog()
             //urlGet()
         }
-
 
         btnSearch.setOnClickListener { openDialog() }
 
@@ -417,3 +422,5 @@ class MainActivity : AppCompatActivity(), Communicator {
 //base64ImageString = URLEncoder.encode(base64ImageString, "UTF-8")
 //
 //doApiRequest(base64ImageString)
+
+

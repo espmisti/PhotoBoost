@@ -11,7 +11,6 @@ import androidx.fragment.app.FragmentActivity
 
 
 class MyWebViewClient(context: FragmentActivity?) : WebViewClient() {
-    var oh = ""
     override fun onPageStarted(view: WebView?, url: String, favicon: Bitmap?) {
         Log.d("MainActivity", "onPageStarted: $url")
         super.onPageStarted(view, url, favicon)

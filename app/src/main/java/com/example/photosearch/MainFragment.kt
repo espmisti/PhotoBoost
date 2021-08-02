@@ -1,5 +1,6 @@
 package com.example.photosearch
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,8 +23,8 @@ class MainFragment : Fragment() {
 
 
         view.m_button_choose_tariff.setOnClickListener {
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.fragment_container, PremiumSearchFragment())?.commit()
+            startActivity(Intent(activity, FirstLaunch3Activity::class.java))
+            activity?.finish()
         }
         view.m_button_history.setOnClickListener {
             activity?.supportFragmentManager?.beginTransaction()
