@@ -9,10 +9,13 @@ class FirstLaunch3Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_first_launch3)
-
-        fl3_buttonClose.setOnClickListener {
+        fl3_button_next.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
+    }
+    override fun onBackPressed() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 }

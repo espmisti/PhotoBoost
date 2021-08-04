@@ -118,7 +118,6 @@ class PhotoWebViewActivity : AppCompatActivity() {
             initView("https://yandex.ru/images/search")
             //
             webview_button_google.setTextColor(getColor(R.color.unactive_search_service))
-            webview_button_tineye.setTextColor(getColor(R.color.unactive_search_service))
             webview_button_premium.setTextColor(getColor(R.color.unactive_search_service))
         }
 
@@ -128,24 +127,13 @@ class PhotoWebViewActivity : AppCompatActivity() {
             webview_button_google.setTextColor(getColor(R.color.active_search_service))
             initView("https://images.google.ru/")
             //
-            webview_button_tineye.setTextColor(getColor(R.color.unactive_search_service))
             webview_button_premium.setTextColor(getColor(R.color.unactive_search_service))
         }
 
-        webview_button_tineye.setOnClickListener {
-            webview_button_yandex.setTextColor(getColor(R.color.unactive_search_service))
-            webview_button_google.setTextColor(getColor(R.color.unactive_search_service))
-            //
-            webview_button_tineye.setTextColor(getColor(R.color.active_search_service))
-            initView("https://tineye.com/")
-            //
-            webview_button_premium.setTextColor(getColor(R.color.unactive_search_service))
-        }
 
         webview_button_premium.setOnClickListener {
             webview_button_yandex.setTextColor(getColor(R.color.unactive_search_service))
             webview_button_google.setTextColor(getColor(R.color.unactive_search_service))
-            webview_button_tineye.setTextColor(getColor(R.color.unactive_search_service))
             //
             webview_button_premium.setTextColor(getColor(R.color.active_search_service))
             initView("https://vk.com/negrimama")

@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_photo_web_view.webview_button_google
 import kotlinx.android.synthetic.main.activity_photo_web_view.webview_button_premium
-import kotlinx.android.synthetic.main.activity_photo_web_view.webview_button_tineye
 import kotlinx.android.synthetic.main.activity_photo_web_view.webview_button_yandex
 import kotlinx.android.synthetic.main.fragment_web_view.view.*
 import android.webkit.WebView
@@ -43,21 +42,17 @@ class WebViewFragment : Fragment() {
 
         initView("https://yandex.ru/images/search?rpt=imageview&url=$SERVER_URL$result")
         view.webview_button_yandex.setOnClickListener {
-            buttonNavigation(webview_button_yandex, webview_button_premium, webview_button_google, webview_button_tineye)
+            buttonNavigation(webview_button_yandex, webview_button_premium, webview_button_google)
             initView("https://yandex.ru/images/search?rpt=imageview&url=$SERVER_URL$result")
         }
         view.webview_button_google.setOnClickListener {
-            buttonNavigation(webview_button_google, webview_button_yandex, webview_button_premium, webview_button_tineye)
+            buttonNavigation(webview_button_google, webview_button_yandex, webview_button_premium)
             initView("https://images.google.com/searchbyimage?image_url=$SERVER_URL$result")
-        }
-        view.webview_button_tineye.setOnClickListener {
-            buttonNavigation(webview_button_tineye, webview_button_yandex, webview_button_google, webview_button_premium)
-            initView("https://tineye.com/")
         }
         view.webview_button_premium.setOnClickListener {
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.fragment_container, PremiumSearchFragment())?.commit()
-            buttonNavigation(webview_button_premium, webview_button_yandex, webview_button_google, webview_button_tineye)
+            buttonNavigation(webview_button_premium, webview_button_yandex, webview_button_google)
         }
         return view
     }
@@ -117,12 +112,11 @@ class WebViewFragment : Fragment() {
         defWebView.loadUrl(url_site)
     }
     // <-       Переключение кнопок        -> //
-    fun buttonNavigation(active: TextView, unactive_1: TextView, unactive_2: TextView, unactive_3: TextView){
+    fun buttonNavigation(active: TextView, unactive_1: TextView, unactive_2: TextView){
         try{
             active.setTextColor(requireActivity().getColor(R.color.active_search_service))
             unactive_1.setTextColor(requireActivity().getColor(R.color.unactive_search_service))
             unactive_2.setTextColor(requireActivity().getColor(R.color.unactive_search_service))
-            unactive_3.setTextColor(requireActivity().getColor(R.color.unactive_search_service))
         } catch (e: Exception){
             e.printStackTrace()
             Log.e(TAG, "Ошибка в методе смены цвета кнопок: ", e)

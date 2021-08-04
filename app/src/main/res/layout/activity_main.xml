@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:backgroundTint="#5266B9"
+            android:backgroundTint="#E63244"
             android:baselineAlignBottom="false"
             android:src="@drawable/ic_plus"
             app:borderWidth="0dp"

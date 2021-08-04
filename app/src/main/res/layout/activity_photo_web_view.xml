@@ -24,7 +24,7 @@
             android:gravity="center"
             android:padding="12dp"
             android:text="Yandex"
-            android:textColor="#314AAE"
+            android:textColor="#E63244"
             android:textStyle="bold" />
 
         <TextView
@@ -35,18 +35,7 @@
             android:gravity="center"
             android:padding="12dp"
             android:text="Google"
-            android:textColor="#9DA8D3"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/webview_button_tineye"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="12dp"
-            android:text="TinEye"
-            android:textColor="#9DA8D3"
+            android:textColor="#FFA9A9"
             android:textStyle="bold" />
 
         <TextView
@@ -56,8 +45,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="12dp"
-            android:text="Premium поиск"
-            android:textColor="#9DA8D3"
+            android:text="Premium"
+            android:textColor="#FFA9A9"
             android:textStyle="bold" />
     </LinearLayout>
 

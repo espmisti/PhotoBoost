@@ -114,9 +114,7 @@ class MainActivity : AppCompatActivity(), Communicator {
 
     private fun openGalleryForImage() {
         try{
-            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE_ASK_PERMISSIONS)
-            }
+
             val i = Intent(Intent.ACTION_PICK)
             i.type = "image/*"
             startActivityForResult(i, REQUEST_CODE_GALLERY)
@@ -256,14 +254,6 @@ class MainActivity : AppCompatActivity(), Communicator {
         return result
     }
 
-    private fun createTemporaryFile(part: String, ext: String): File? {
-        var tempDir = Environment.getExternalStorageDirectory()
-        tempDir = File(tempDir.absolutePath + "/.temp/")
-        if (!tempDir.exists()) {
-            tempDir.mkdirs()
-        }
-        return File.createTempFile(part, ext, tempDir)
-    }
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -297,22 +287,6 @@ class MainActivity : AppCompatActivity(), Communicator {
     // <-                          -> //
 
 
-
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
-            REQUEST_CODE_ASK_PERMISSIONS -> if (grantResults[0] === PackageManager.PERMISSION_GRANTED) {
-// Permission Granted
-                openGalleryForImage()
-            } else {
-// Permission Denied
-                Toast.makeText(this@MainActivity, "нету разрешения очкоблядун блять", Toast.LENGTH_SHORT)
-                    .show()
-            }
-            else -> super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        }
-    }
     fun urlGet() : String{
         return fileURL
     }

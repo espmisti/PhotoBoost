@@ -4,22 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_second"
+    android:background="@drawable/ic_background_3"
     tools:context=".PremiumBuyCatalogFragment">
 
     <Button
         android:id="@+id/c_buttonBuySearch"
         style="@android:style/Widget.Button"
-        android:layout_width="259dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="25dp"
+        android:layout_width="283dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/button"
-        android:fontFamily="@font/sfpro_bold"
-        android:text="Оплатить поиски"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Оплатить"
         android:textColor="#FFFFFF"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="@+id/tableLayout"
-        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="@+id/tableLayout"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
 
@@ -30,30 +29,19 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/sfpro_bold"
+        android:layout_marginTop="152dp"
+        android:fontFamily="@font/montserrat_bold"
         android:text="Поиски Premium"
-        android:textColor="#2E4085"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/line"
-        app:layout_constraintStart_toStartOf="@+id/line"
-        app:layout_constraintTop_toBottomOf="@+id/line" />
-
-    <ImageView
-        android:id="@+id/line"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="#000000"
+        android:textSize="26sp"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_logo_photosearch" />
+        tools:layout_editor_absoluteX="86dp" />
 
     <TableLayout
         android:id="@+id/tableLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="40dp"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="@+id/p_textheader4"
         app:layout_constraintStart_toStartOf="@+id/p_textheader4"
@@ -68,7 +56,8 @@
                 android:id="@+id/radioButton8"
                 android:layout_width="135dp"
                 android:layout_height="62dp"
-                android:background="@drawable/radiobutton_custom" />
+                android:background="@drawable/radiobutton_custom"
+                android:checked="false" />
 
             <RadioButton
                 android:id="@+id/radioButton11"
@@ -102,10 +91,10 @@
 
     <TextView
         android:id="@+id/menu_text_subscription_button"
-        android:layout_width="371dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/sfpro_regular"
+        android:layout_width="343dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserrat_regular"
         android:text="Продолжая, вы соглашаетесь с Условиями использования и Политикой конфиденциальности. Пожалуйста, ознакомьтесь с ними, а затем продолжите."
         android:textAlignment="center"
         android:textColor="#797979"

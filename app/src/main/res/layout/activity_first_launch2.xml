@@ -4,45 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_first"
+    android:background="@drawable/ic_background_2"
     tools:context=".FirstLaunch2Activity">
 
+    <ImageView
+        android:id="@+id/fl2_loading"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_loading_firstlaunch_2" />
+
     <Button
-        android:id="@+id/fl2_button_next1"
+        android:id="@+id/fl2_button_next"
         style="@android:style/Widget.Button"
-        android:layout_width="259dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/button"
-        android:fontFamily="@font/sfpro_bold"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/button_firstlaunch"
+        android:fontFamily="@font/montserrat_bold"
         android:text="Хочу попробовать!"
         android:textColor="#FFFFFF"
         android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="@+id/fl2_text2"
-        app:layout_constraintStart_toStartOf="@+id/fl2_text2"
-        app:layout_constraintTop_toBottomOf="@+id/fl2_text2" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/fl2_text2"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/sfpro_regular"
+        android:fontFamily="@font/montserrat_regular"
         android:text="Просто загрузи фотографию и найди человека или двойника. Попробуй бесплатно!"
         android:textAlignment="center"
-        android:textColor="#5266B9"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/fl3_text1"
-        app:layout_constraintStart_toStartOf="@+id/fl3_text1"
-        app:layout_constraintTop_toBottomOf="@+id/fl3_text1" />
+        android:textColor="#6D6D6D"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/fl2_text1"
+        app:layout_constraintStart_toStartOf="@+id/fl2_text1"
+        app:layout_constraintTop_toBottomOf="@+id/fl2_text1" />
 
     <TextView
-        android:id="@+id/fl3_text1"
+        android:id="@+id/fl2_text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/sfpro_bold"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/montserrat_bold"
         android:text="Найди людей за секунды"
-        android:textColor="#2E4085"
+        android:textColor="#EB4252"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/fl2_imgMain"
         app:layout_constraintStart_toStartOf="@+id/fl2_imgMain"
@@ -50,58 +60,14 @@
 
     <ImageView
         android:id="@+id/fl2_imgMain"
-        android:layout_width="274dp"
-        android:layout_height="332dp"
+        android:layout_width="234dp"
+        android:layout_height="278dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.248"
-        app:srcCompat="@drawable/img_firstlaunch2_main" />
+        app:srcCompat="@drawable/img_people_firstlaunch_2" />
 
-    <ImageView
-        android:id="@+id/fl2_buttonClose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/slider1"
-        app:layout_constraintEnd_toStartOf="@+id/slider1"
-        app:layout_constraintHorizontal_bias="0.563"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/slider1"
-        app:srcCompat="@drawable/ic_close" />
-
-    <ImageView
-        android:id="@+id/slider1"
-        android:layout_width="70dp"
-        android:layout_height="3dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/slider_active"
-        app:layout_constraintEnd_toStartOf="@+id/slider_active"
-        app:layout_constraintTop_toTopOf="@+id/slider_active"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/slides" />
-
-    <ImageView
-        android:id="@+id/slider2"
-        android:layout_width="70dp"
-        android:layout_height="3dp"
-        android:layout_marginStart="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/slider_active"
-        app:layout_constraintStart_toEndOf="@+id/slider_active"
-        app:layout_constraintTop_toTopOf="@+id/slider_active"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/slides" />
-
-    <ImageView
-        android:id="@+id/slider_active"
-        android:layout_width="70dp"
-        android:layout_height="3dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/fl2_imgMain"
-        app:layout_constraintEnd_toEndOf="@+id/fl2_imgMain"
-        app:layout_constraintHorizontal_bias="0.457"
-        app:layout_constraintStart_toStartOf="@+id/fl2_imgMain"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/slides_hover" />
 </androidx.constraintlayout.widget.ConstraintLayout>

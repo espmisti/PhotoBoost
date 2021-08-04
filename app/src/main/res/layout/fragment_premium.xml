@@ -4,116 +4,96 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_second" >
+    android:background="@drawable/ic_background_3">
 
-    <ImageView
+    <Button
         android:id="@+id/p_button_history"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:src="@drawable/ic_history"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        style="@android:style/Widget.Button"
+        android:layout_width="300dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_history"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="История"
+        android:textColor="#E63244"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="@+id/p_button_buysearch"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/p_button_buysearch"
+        app:layout_constraintTop_toBottomOf="@+id/p_button_buysearch" />
 
     <Button
         android:id="@+id/p_button_buysearch"
         style="@android:style/Widget.Button"
         android:layout_width="300dp"
         android:layout_height="57dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/button"
-        android:fontFamily="@font/sfpro_bold"
+        android:fontFamily="@font/montserrat_bold"
         android:text="Оплатить поиски"
         android:textColor="#FFFFFF"
         android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="@+id/p_textmain2"
-        app:layout_constraintStart_toStartOf="@+id/p_textmain2"
-        app:layout_constraintTop_toBottomOf="@+id/p_textmain2" />
+        app:layout_constraintEnd_toEndOf="@+id/fb_maintext"
+        app:layout_constraintStart_toStartOf="@+id/fb_maintext"
+        app:layout_constraintTop_toBottomOf="@+id/fb_maintext" />
 
     <TextView
-        android:id="@+id/p_maintext"
+        android:id="@+id/fb_maintext"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/sfpro_regular"
-        android:text="Для начала поиска по изображению нажмите на иконку."
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="Для начала поиска по изображению нажмите на кнопку"
         android:textAlignment="center"
-        android:textColor="#5266B9"
+        android:textColor="#BDBDBD"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/p_textheader"
-        app:layout_constraintStart_toStartOf="@+id/p_textheader"
-        app:layout_constraintTop_toBottomOf="@+id/p_textheader" />
+        app:layout_constraintEnd_toEndOf="@+id/fb_textheader"
+        app:layout_constraintStart_toStartOf="@+id/fb_textheader"
+        app:layout_constraintTop_toBottomOf="@+id/fb_textheader" />
 
     <TextView
-        android:id="@+id/p_textheader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="92dp"
-        android:fontFamily="@font/sfpro_bold"
-        android:text="Premium поиск"
-        android:textColor="#2E4085"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/p_textmain2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/sfpro_bold"
-        android:text="Доступно поисков"
-        android:textColor="#2E4085"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/p_count"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="@+id/p_count"
-        app:layout_constraintTop_toBottomOf="@+id/p_count" />
-
-    <TextView
-        android:id="@+id/p_count"
+        android:id="@+id/fb_textheader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="20dp"
-        android:fontFamily="@font/sfpro_bold"
-        android:text="0"
-        android:textColor="#2E4085"
-        android:textSize="35dp"
-        app:layout_constraintEnd_toEndOf="@+id/p_button_search"
-        app:layout_constraintStart_toStartOf="@+id/p_button_search"
-        app:layout_constraintTop_toBottomOf="@+id/p_button_search" />
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Премиум поиск"
+        android:textColor="#000000"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-    <ImageButton
-        android:id="@+id/p_button_search"
-        android:layout_width="108dp"
-        android:layout_height="106dp"
-        android:layout_marginTop="32dp"
-        android:background="#00FFFFFF"
-        app:layout_constraintEnd_toEndOf="@+id/p_maintext"
-        app:layout_constraintStart_toStartOf="@+id/p_maintext"
-        app:layout_constraintTop_toBottomOf="@+id/p_maintext"
-        app:srcCompat="@drawable/ic_button_plus" />
-
-    <ImageView
-        android:id="@+id/p_image"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/p_button_search"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/ic_have_search"
+        android:fontFamily="@font/montserrat_medium"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingTop="2dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="2dp"
+        android:text="Доступно поисков: 0"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.108"
-        app:layout_constraintStart_toEndOf="@+id/p_button_search"
-        app:layout_constraintTop_toBottomOf="@+id/p_maintext"
-        app:layout_constraintVertical_bias="0.095"
-        app:srcCompat="@drawable/ic_arrow" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="122dp"
+        android:layout_height="116dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@drawable/ic_button_premiumsearch" />
 </androidx.constraintlayout.widget.ConstraintLayout>

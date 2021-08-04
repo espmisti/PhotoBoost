@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/mPremium"
-        android:title="Premium поиск"
+        android:title="Премиум поиск"
         android:icon="@drawable/ic_premiumsearch"/>
     <item android:id="@+id/mText"
         android:title="Поиск по подписке"

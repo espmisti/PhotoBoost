@@ -5,53 +5,40 @@
     android:layout_width="350dp"
     android:layout_height="230dp"
     android:layout_gravity="center"
-    android:background="@drawable/dialog_background"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/dialog_button_chooseimage"
-        style="@android:style/Widget.Button"
-        android:layout_width="260dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="48dp"
-        android:background="@drawable/button"
-        android:fontFamily="@font/sfpro_bold"
-        android:onClick="chooseImageDialog"
-        android:text="Выбрать из галереи"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
+    <ImageView
+        android:id="@+id/dialog_photo"
+        android:layout_width="80dp"
+        android:onClick="photoCameraDialog"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/dialog_button_photo"
-        style="@android:style/Widget.Button"
-        android:layout_width="260dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/button"
-        android:fontFamily="@font/sfpro_bold"
-        android:onClick="photoCameraDialog"
-        android:text="Сфотографировать"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/dialog_button_chooseimage"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/dialog_button_chooseimage"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_button_chooseimage" />
-
-    <ImageButton
-        android:id="@+id/dialog_button_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="12dp"
-        android:background="#009E6868"
-        android:onClick="closeDialog"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_close" />
+        app:srcCompat="@drawable/ic_button_photo" />
 
+    <ImageView
+        android:id="@+id/dialog_gallery"
+        android:onClick="chooseImageDialog"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/dialog_photo"
+        app:layout_constraintEnd_toStartOf="@+id/dialog_photo"
+        app:layout_constraintTop_toTopOf="@+id/dialog_photo"
+        app:srcCompat="@drawable/ic_button_gallery" />
+
+    <ImageView
+        android:id="@+id/dialog_close"
+        android:onClick="closeDialog"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/dialog_photo"
+        app:layout_constraintStart_toEndOf="@+id/dialog_photo"
+        app:layout_constraintTop_toTopOf="@+id/dialog_photo"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_button_close" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,28 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_first"
+    android:background="@drawable/ic_background_1"
     tools:context=".FirstLaunch1Activity">
 
     <ImageView
         android:id="@+id/fl_imgMain"
-        android:layout_width="274dp"
-        android:layout_height="332dp"
+        android:layout_width="234dp"
+        android:layout_height="278dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.248"
-        app:srcCompat="@drawable/img_firstlaunch1_main" />
+        app:srcCompat="@drawable/img_people_firstlaunch" />
 
     <TextView
         android:id="@+id/fl_text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/sfpro_bold"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/montserrat_bold"
         android:text="Премиум-поиск по фото"
-        android:textColor="#2E4085"
+        android:textColor="#EB4252"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/fl_imgMain"
         app:layout_constraintStart_toStartOf="@+id/fl_imgMain"
@@ -36,71 +37,38 @@
         android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/sfpro_regular"
+        android:fontFamily="@font/montserrat_regular"
         android:text="Найдем то, что другие приложения не ищут. Покажем то, что другие скрывают."
         android:textAlignment="center"
-        android:textColor="#5266B9"
-        android:textSize="18sp"
+        android:textColor="#6D6D6D"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/fl_text1"
         app:layout_constraintStart_toStartOf="@+id/fl_text1"
         app:layout_constraintTop_toBottomOf="@+id/fl_text1" />
 
     <Button
-        android:id="@+id/fl_button_next1"
+        android:id="@+id/fl_button_next"
         style="@android:style/Widget.Button"
-        android:layout_width="259dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/button"
-        android:fontFamily="@font/sfpro_bold"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/button_firstlaunch"
+        android:fontFamily="@font/montserrat_bold"
         android:text="То, что надо!"
         android:textColor="#FFFFFF"
         android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="@+id/fl_text2"
-        app:layout_constraintStart_toStartOf="@+id/fl_text2"
-        app:layout_constraintTop_toBottomOf="@+id/fl_text2" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/slider_active"
-        android:layout_width="70dp"
-        android:layout_height="3dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/slider1"
-        app:layout_constraintEnd_toStartOf="@+id/slider1"
-        app:layout_constraintTop_toTopOf="@+id/slider1"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/slides_hover" />
-
-    <ImageView
-        android:id="@+id/slider1"
-        android:layout_width="70dp"
-        android:layout_height="3dp"
-        app:layout_constraintBottom_toTopOf="@+id/fl_imgMain"
-        app:layout_constraintEnd_toEndOf="@+id/fl_imgMain"
-        app:layout_constraintStart_toStartOf="@+id/fl_imgMain"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/slides" />
-
-    <ImageView
-        android:id="@+id/slider2"
-        android:layout_width="70dp"
-        android:layout_height="3dp"
-        android:layout_marginStart="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/slider1"
-        app:layout_constraintStart_toEndOf="@+id/slider1"
-        app:layout_constraintTop_toTopOf="@+id/slider1"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/slides" />
-
-    <ImageView
-        android:id="@+id/fl_buttonClose"
-        android:layout_width="wrap_content"
+        android:id="@+id/fl_loading"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/slider_active"
-        app:layout_constraintEnd_toStartOf="@+id/slider_active"
-        app:layout_constraintHorizontal_bias="0.563"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/slider_active"
-        app:srcCompat="@drawable/ic_close" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/loading_firstlaunch_1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

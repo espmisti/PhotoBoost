@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_second"
+    android:background="@drawable/ic_background_main"
     tools:context=".MainFragment">
 
     <Button
@@ -12,29 +12,44 @@
         style="@android:style/Widget.Button"
         android:layout_width="300dp"
         android:layout_height="57dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="56dp"
         android:background="@drawable/button"
         android:fontFamily="@font/sfpro_bold"
         android:text="Выбрать тариф"
         android:textColor="#FFFFFF"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="@+id/m_text_subscription"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="@+id/m_text_subscription"
         app:layout_constraintTop_toBottomOf="@+id/m_text_subscription" />
+
+    <Button
+        android:id="@+id/m_button_history"
+        style="@android:style/Widget.Button"
+        android:layout_width="300dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/button_history"
+        android:fontFamily="@font/sfpro_bold"
+        android:text="История"
+        android:textColor="#E63244"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="@+id/m_button_choose_tariff"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/m_button_choose_tariff"
+        app:layout_constraintTop_toBottomOf="@+id/m_button_choose_tariff" />
 
     <TextView
         android:id="@+id/m_text_subscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/sfpro_regular"
+        android:fontFamily="@font/montserrat_regular"
         android:text="Подписка активна"
         android:textAlignment="center"
-        android:textColor="#5266B9"
+        android:textColor="#85D072"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/m_textheader"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="@+id/m_textheader"
         app:layout_constraintTop_toBottomOf="@+id/m_textheader" />
 
@@ -42,48 +57,24 @@
         android:id="@+id/m_textheader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/sfpro_bold"
+        android:fontFamily="@font/montserrat_bold"
         android:text="Профиль"
-        android:textColor="#2E4085"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/m_image"
-        app:layout_constraintStart_toStartOf="@+id/m_image"
-        app:layout_constraintTop_toBottomOf="@+id/m_image" />
+        android:textColor="#000000"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <ImageView
-        android:id="@+id/m_button_history"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:src="@drawable/ic_history"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/m_image"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:layout_marginTop="100dp"
-        android:src="@drawable/app_icon"
+        android:id="@+id/imageView"
+        android:layout_width="202dp"
+        android:layout_height="230dp"
+        android:src="@drawable/img_people_main_1"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.255" />
 
-    <TextView
-        android:id="@+id/m_iscansearch"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/square_white"
-        android:text="Вам доступен 1 бесплатный поиск"
-        android:textAlignment="center"
-        android:textColor="#5266B9"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/m_button_choose_tariff"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="@+id/m_button_choose_tariff"
-        app:layout_constraintTop_toBottomOf="@+id/m_button_choose_tariff" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,18 +16,22 @@
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar.Bridge">
-        <activity android:name=".LoadingActivity"/>
+        <activity android:name=".MainActivity"/>
         <activity android:name=".PhotoWebViewActivity" />
         <activity android:name=".FirstLaunch3Activity" />
         <activity android:name=".FirstLaunch2Activity" />
         <activity android:name=".FirstLaunch1Activity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
