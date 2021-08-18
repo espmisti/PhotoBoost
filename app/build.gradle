@@ -65,4 +65,10 @@ dependencies {
     //retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.0.0'
+
+    //billing client
+    implementation "com.android.billingclient:billing:4.0.0"
+
+    //adapty
+    implementation 'com.github.adaptyteam:AdaptySDK-Android:1.4.0'
 }
