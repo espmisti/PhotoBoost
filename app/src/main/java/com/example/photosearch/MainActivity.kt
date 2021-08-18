@@ -1,14 +1,11 @@
 package com.example.photosearch
 
-import android.Manifest
-import android.R.attr.key
 import android.app.Activity
 import android.app.Dialog
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -22,9 +19,6 @@ import android.os.StrictMode.VmPolicy
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.webkit.WebResourceRequest
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -34,19 +28,19 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.photosearch.Helpers.makeRequest
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_photo_web_view.*
-import kotlinx.android.synthetic.main.dialog.*
 import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.coroutines.*
 import org.apache.commons.net.ftp.FTPClient
-import java.io.*
+import java.io.ByteArrayOutputStream
 import java.io.File
-import java.net.URI
+import java.io.FileOutputStream
 import java.net.URLEncoder
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 import kotlin.concurrent.thread
 
@@ -71,21 +65,52 @@ class MainActivity : AppCompatActivity(), Communicator {
 
     private val ftp = ftp_client()
     var fileURL = ""
-
-    lateinit var sp: SharedPreferences
     var result: String? = null
+
+    // Список со всеми фотками
+    private var photosUrlList = ArrayList<String>()
+
+    // SharedPreferences
+    lateinit var mSettings: SharedPreferences
+    val APP_PREFERENCES = "mysettings"
+    val APP_PREFERENCES_NAME = "HistoryListUrl"
+    val MY_SHARED_PREF_NAME = "mySharedPref"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+//        // SharedPreferences
+//        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+//        val editor: SharedPreferences.Editor = mSettings.edit()
+//        editor.putString(APP_PREFERENCES_NAME, photosUrlList)
+//        editor.apply()
+//        // SharedPreferences
+
+//
+
+
+        showSavedUrl()
+
         window.navigationBarColor = ContextCompat.getColor(this, R.color.white)
 
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         navigationView2.itemIconTintList = null
+//
+//        val bundle = Bundle()
+//        if (mSettings.contains(APP_PREFERENCES_NAME)) {
+//            val photosList = mSettings.getString(APP_PREFERENCES_NAME, "")
+//            bundle.putStringArrayList("arrayPhotos", photosList)
+//            fragment.setArguments(bundle)
+//        } else {
+//
+//        }
 
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, MainFragment()).commit()
-        dialogChoose=Dialog(this)
+        Log.i("history", "Изначально = ${photosUrlList.size}")
+
+        dialogChoose = Dialog(this)
         btnSearch.setOnClickListener {
 // openGalleryForImage()
             openDialog()
@@ -158,10 +183,6 @@ class MainActivity : AppCompatActivity(), Communicator {
         fos.flush()
         fos.close()
         return Uri.fromFile(tempFile)
-    }
-
-    private fun doApiRequest(base64ImageString: String) {
-
     }
 
 
@@ -240,6 +261,12 @@ class MainActivity : AppCompatActivity(), Communicator {
                         Log.i(TAG, "onActivityResult: $e")
                     }
 
+                    //photosUrlList.add("http112://$SERVER_IP/$fileName.jpg")
+                    photosUrlList.add("https://ne-dieta.ru/wp-content/uploads/2017/11/final_1200-7.jpg")
+                    Log.i(TAG, "onActivityResult: $SERVER_IP/$fileName.jpg")
+                    saveData(photosUrlList)
+                    Log.i(TAG, "photosUrlList size = : ${photosUrlList.size}")
+
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_container, WebViewFragment()).commit()
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -248,6 +275,25 @@ class MainActivity : AppCompatActivity(), Communicator {
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun saveData(arrayOfPhotos: ArrayList<String>) {
+        val sharedPref = getSharedPreferences(MY_SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val gson = Gson()
+        val jsonString = gson.toJson(arrayOfPhotos)
+        val editor = sharedPref.edit()
+        editor.putString("list", jsonString)
+        editor.apply()
+    }
+
+    fun showSavedUrl() {
+        val sharedPref = getSharedPreferences(MY_SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        if (sharedPref.contains("list")) {
+            val stringList = sharedPref.getString("list", "у тебя не работает нихуя осел")
+            val gson = Gson()
+            val type = object : TypeToken<java.util.ArrayList<String?>?>() {}.type
+            photosUrlList = gson.fromJson(stringList, type) as ArrayList<String>
+        }
     }
 
     fun getMyData(): String? {

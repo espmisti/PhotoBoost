@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -54,7 +55,7 @@ class PremiumSearchFragment : Fragment(), OnUserClickListener {
 //            } else {
 ////                btn_update_list.visibility = View.VISIBLE
 ////                return@thread
-//                Toast.makeText(context, "Проверьте подключение к интернету", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(contextf, "Проверьте подключение к интернету", Toast.LENGTH_SHORT).show()
 //            }
 //        }
 
@@ -70,7 +71,7 @@ class PremiumSearchFragment : Fragment(), OnUserClickListener {
             setUsersList()
         } else {
             view?.findViewById<ImageView>(R.id.btn_update_list)?.visibility = View.VISIBLE
-            view?.findViewById<ProgressBar>(R.id.loading_progressbar)?.visibility = View.INVISIBLE
+            view?.findViewById<TextView>(R.id.loading_progressbar)?.visibility = View.INVISIBLE
             Toast.makeText(context, "Проверьте подключение к интернету", Toast.LENGTH_SHORT).show()
             view?.findViewById<ImageView>(R.id.btn_update_list)?.setOnClickListener {
                 if (isOnline()) {
@@ -88,7 +89,11 @@ class PremiumSearchFragment : Fragment(), OnUserClickListener {
 
     private fun setUsersList() {
         try {
-            val json = JSONObject(apiResponse).getString("result")
+            val json = try {
+                JSONObject(apiResponse).getString("result")
+            } catch (e: Exception) {
+                "[]"
+            }
             Log.i(TAG, "onCreate: $json")
             val timer = object: CountDownTimer(20000, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
