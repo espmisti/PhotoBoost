@@ -9,7 +9,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.photosearch"
+        applicationId "com.smdevisiors.photoboost"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
@@ -34,6 +34,10 @@ android {
     buildFeatures {
         viewBinding true
     }
+}
+
+repositories {
+    mavenCentral()
 }
 
 dependencies {
@@ -67,7 +71,10 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.0.0'
 
     //billing client
-    implementation "com.android.billingclient:billing:4.0.0"
+    implementation 'com.anjlab.android.iab.v3:library:1.0.44'
+
+    //billing client хуй пойми какой
+//    implementation "com.android.billingclient:billing:4.0.0"
 
     //adapty
     implementation 'com.github.adaptyteam:AdaptySDK-Android:1.4.0'

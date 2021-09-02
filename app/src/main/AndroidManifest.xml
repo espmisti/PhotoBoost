@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.photosearch">
+    package="com.smdevisiors.photoboost">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="com.android.vending.BILLING" />
 
     <application
         android:allowBackup="true"
@@ -16,12 +16,12 @@
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar.Bridge">
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".PhotoWebViewActivity" />
-        <activity android:name=".FirstLaunch3Activity" />
-        <activity android:name=".FirstLaunch2Activity" />
-        <activity android:name=".FirstLaunch1Activity" />
-        <activity android:name=".LoadingActivity">
+        <activity android:name="com.smdevisiors.photoboost.MainActivity"/>
+        <activity android:name="com.smdevisiors.photoboost.PhotoWebViewActivity" />
+        <activity android:name="com.smdevisiors.photoboost.FirstLaunch3Activity" />
+        <activity android:name="com.smdevisiors.photoboost.FirstLaunch2Activity" />
+        <activity android:name="com.smdevisiors.photoboost.FirstLaunch1Activity" />
+        <activity android:name="com.smdevisiors.photoboost.LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -30,7 +30,7 @@
         app:srcCompat="@drawable/img_people_firstlaunch_3" />
 
     <ImageView
-        android:id="@+id/fl3_button_1"
+        android:id="@+id/fl3_button_best_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -66,14 +66,14 @@
         app:layout_constraintTop_toBottomOf="@+id/fl3_imgMain" />
 
     <ImageView
-        android:id="@+id/fl3_button_2"
+        android:id="@+id/fl3_button_3_days_free"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/fl3_button_1"
+        app:layout_constraintEnd_toEndOf="@+id/fl3_button_best_price"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/fl3_button_1"
-        app:layout_constraintTop_toBottomOf="@+id/fl3_button_1"
+        app:layout_constraintStart_toStartOf="@+id/fl3_button_best_price"
+        app:layout_constraintTop_toBottomOf="@+id/fl3_button_best_price"
         app:srcCompat="@drawable/ic_firstlaunch_3_button_2" />
 
     <TextView
@@ -86,10 +86,11 @@
         android:textAlignment="center"
         android:textColor="#6D6D6D"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/fl3_button_2"
+        app:layout_constraintBottom_toTopOf="@+id/fl3_button_next"
+        app:layout_constraintEnd_toEndOf="@+id/fl3_button_3_days_free"
         app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="@+id/fl3_button_2"
-        app:layout_constraintTop_toBottomOf="@+id/fl3_button_2" />
+        app:layout_constraintStart_toStartOf="@+id/fl3_button_3_days_free"
+        app:layout_constraintTop_toBottomOf="@+id/fl3_button_3_days_free" />
 
     <TextView
         android:id="@+id/fl3_text2"
