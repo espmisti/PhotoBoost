@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.smdevisiors.photoboost">
+    package="com.koshkatolik.photoboost">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,12 +16,12 @@
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar.Bridge">
-        <activity android:name="com.smdevisiors.photoboost.MainActivity"/>
-        <activity android:name="com.smdevisiors.photoboost.PhotoWebViewActivity" />
-        <activity android:name="com.smdevisiors.photoboost.FirstLaunch3Activity" />
-        <activity android:name="com.smdevisiors.photoboost.FirstLaunch2Activity" />
-        <activity android:name="com.smdevisiors.photoboost.FirstLaunch1Activity" />
-        <activity android:name="com.smdevisiors.photoboost.LoadingActivity">
+        <activity android:name="com.koshkatolik.photoboost.MainActivity"/>
+        <activity android:name="com.koshkatolik.photoboost.PhotoWebViewActivity" />
+        <activity android:name="com.koshkatolik.photoboost.FirstLaunch3Activity" />
+        <activity android:name="com.koshkatolik.photoboost.FirstLaunch2Activity" />
+        <activity android:name="com.koshkatolik.photoboost.FirstLaunch1Activity" />
+        <activity android:name="com.koshkatolik.photoboost.LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
