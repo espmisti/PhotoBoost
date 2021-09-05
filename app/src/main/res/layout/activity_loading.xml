@@ -11,7 +11,7 @@
         android:layout_width="344dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/sfpro_regular"
+        android:fontFamily="@font/montserrat_regular"
         android:text="Подготавливаем сервера к сверх-нагрузке, чтобы выдать максимум информации для тебя"
         android:textAlignment="center"
         android:textColor="#CCCCCC"
