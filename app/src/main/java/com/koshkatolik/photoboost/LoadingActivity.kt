@@ -9,19 +9,29 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.anjlab.android.iab.v3.BillingProcessor
+import com.anjlab.android.iab.v3.TransactionDetails
+import com.koshkatolik.photoboost.subscriptions.BillingSubscribe
 
 
 class LoadingActivity : AppCompatActivity() {
     private val TAG = "Permissions"
+    var bp: BillingSubscribe = BillingSubscribe()
+    var purchaseTransactionDetails: TransactionDetails? = null
     var REQUEST_CODE_ASK_PERMISSIONS = 1
     lateinit var sharedSetting: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_loading)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.statusBarColor = this.resources.getColor(R.color.white)
+        window.navigationBarColor = ContextCompat.getColor(this, R.color.white)
         sharedSetting = getSharedPreferences("settings", Context.MODE_PRIVATE)
         val isAvailable = BillingProcessor.isIabServiceAvailable(this)
         if(!isAvailable){
@@ -29,6 +39,14 @@ class LoadingActivity : AppCompatActivity() {
             Log.e("Billing", "Loading (LoadingActivity): Устройство не поддерживает Google Play")
             finish()
         } else {
+            bp.initialization(this)
+            purchaseTransactionDetails = bp.billing?.getSubscriptionTransactionDetails("leonid")
+            bp.billing?.loadOwnedPurchasesFromGoogle()
+            if(bp.isHasSub()){
+                Log.i("sub_billing", "У пользователя есть подписка!")
+            } else {
+                Log.i("sub_billing", "У пользователя нет подписки!")
+            }
             if(!sharedSetting.getBoolean("hasLaunch", false)){
                 Handler().postDelayed({ if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) { requestPerms() } }, 2000)
             } else {
@@ -50,7 +68,7 @@ class LoadingActivity : AppCompatActivity() {
                 val e: SharedPreferences.Editor = sharedSetting.edit()
                 e.putBoolean("hasLaunch", true)
                 e.apply()
-                startTimer(FirstLaunch1Activity::class.java)
+                startTimer(SliderActivity::class.java)
             } else {
                 Toast.makeText(this, "Для работы с приложением требуется доступ к мультимедии!", Toast.LENGTH_SHORT).show()
                 Log.e(TAG, "Loading (LoadingActivity): Разрешения на камеру были отклонены")

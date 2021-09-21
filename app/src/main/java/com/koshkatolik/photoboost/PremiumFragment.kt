@@ -20,11 +20,6 @@ class PremiumFragment : Fragment() {
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.fragment_container, PremiumBuyCatalogFragment())?.commit()
         }
-        view.p_button_history.setOnClickListener {
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.fragment_container, HistoryFragment())?.commit()
-            // сделать проверку
-        }
         return view
     }
 

@@ -29,8 +29,6 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.adapty.Adapty
-import com.adapty.utils.AdaptyLogLevel
 import com.koshkatolik.photoboost.Helpers.makeRequest
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -92,8 +90,6 @@ class MainActivity : AppCompatActivity(), Communicator {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Adapty.activate(applicationContext, "public_live_bgs9ROYH.cyrXexQx4RvhFHrAQ2zN")
-        Adapty.setLogLevel(AdaptyLogLevel.VERBOSE)
         setContentView(R.layout.activity_main)
 
 //        // SharedPreferences
@@ -106,7 +102,7 @@ class MainActivity : AppCompatActivity(), Communicator {
 //
         showSavedUrl()
 
-        window.navigationBarColor = ContextCompat.getColor(this, R.color.white)
+            window.navigationBarColor = ContextCompat.getColor(this, R.color.white)
 
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         navigationView2.itemIconTintList = null

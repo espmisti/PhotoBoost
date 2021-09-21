@@ -7,22 +7,6 @@
     android:background="@drawable/ic_background_3">
 
     <Button
-        android:id="@+id/p_button_history"
-        style="@android:style/Widget.Button"
-        android:layout_width="300dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/button_history"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="История"
-        android:textColor="#E63244"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="@+id/p_button_buysearch"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/p_button_buysearch"
-        app:layout_constraintTop_toBottomOf="@+id/p_button_buysearch" />
-
-    <Button
         android:id="@+id/p_button_buysearch"
         style="@android:style/Widget.Button"
         android:layout_width="300dp"

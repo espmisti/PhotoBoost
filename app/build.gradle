@@ -72,10 +72,7 @@ dependencies {
 
     //billing client
     implementation 'com.anjlab.android.iab.v3:library:1.0.44'
+    //Slider
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
-    //billing client хуй пойми какой
-//    implementation "com.android.billingclient:billing:4.0.0"
-
-    //adapty
-    implementation 'com.github.adaptyteam:AdaptySDK-Android:1.4.0'
 }
