@@ -19,9 +19,6 @@
         <activity android:name=".SliderActivity"></activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".PhotoWebViewActivity" />
-        <activity android:name=".FirstLaunch3Activity" />
-        <activity android:name=".FirstLaunch2Activity" />
-        <activity android:name=".FirstLaunch1Activity" />
         <activity android:name=".LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

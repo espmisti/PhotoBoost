@@ -1,4 +1,4 @@
-package com.koshkatolik.photoboost.fragments
+package com.koshkatolik.photoboost.fragments.sliders
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.koshkatolik.photoboost.MainActivity
 import com.koshkatolik.photoboost.R
-import kotlinx.android.synthetic.main.fragment_third_slide.*
 import kotlinx.android.synthetic.main.fragment_third_slide.view.*
 
 class ThirdSlideFragment : Fragment() {

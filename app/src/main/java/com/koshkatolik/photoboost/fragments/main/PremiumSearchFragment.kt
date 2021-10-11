@@ -1,4 +1,4 @@
-package com.koshkatolik.photoboost
+package com.koshkatolik.photoboost.fragments.main
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.koshkatolik.photoboost.*
 import com.koshkatolik.photoboost.api.ApiRequests
 import com.koshkatolik.photoboost.api.Response
 import kotlinx.android.synthetic.main.fragment_premiun_search.*

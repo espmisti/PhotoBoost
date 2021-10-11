@@ -1,4 +1,4 @@
-package com.koshkatolik.photoboost
+package com.koshkatolik.photoboost.fragments.main
 
 import android.os.Bundle
 import android.view.LayoutInflater

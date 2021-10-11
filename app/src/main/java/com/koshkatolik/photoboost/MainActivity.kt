@@ -32,6 +32,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.koshkatolik.photoboost.Helpers.makeRequest
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.koshkatolik.photoboost.fragments.main.*
 import kotlinx.android.synthetic.main.activity_main.*
 import org.apache.commons.net.ftp.FTPClient
 import java.io.ByteArrayOutputStream
@@ -344,30 +345,29 @@ class MainActivity : AppCompatActivity(), Communicator {
     fun urlGet() : String{
         return fileURL
     }
+    var infofragment = ""
+    fun getInfoFragment() : String {
+        return infofragment
+    }
     fun openDialog(){
         dialogChoose.setContentView(R.layout.dialog)
         dialogChoose.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialogChoose.show()
     }
 
-
-
-
     // <- Кнопки в меню -> //
-    fun feedback(view: View) { supportFragmentManager.beginTransaction().replace(R.id.fragment_container, FeedBackFragment()).commit()
-        drawerLayout.closeDrawer(GravityCompat.START) }
-    fun refund(view: View) { supportFragmentManager.beginTransaction().replace(R.id.fragment_container, RefundFragment()).commit()
-        drawerLayout.closeDrawer(GravityCompat.START) }
-    fun subscriptioncontrol(view: View) { supportFragmentManager.beginTransaction().replace(R.id.fragment_container, SubscriptionControlFragment()).commit()
-        drawerLayout.closeDrawer(GravityCompat.START) }
-    fun premiumsearch(view: View) { supportFragmentManager.beginTransaction().replace(R.id.fragment_container, PremiumFragment()).commit()
-        drawerLayout.closeDrawer(GravityCompat.START) }
-    fun subscribe(view: View) { startActivity(Intent(this, FirstLaunch3Activity::class.java))
-        finish() }
-    fun mainsearch(view: View) { supportFragmentManager.beginTransaction().replace(R.id.fragment_container, MainFragment()).commit()
-        drawerLayout.closeDrawer(GravityCompat.START) }
+    fun feedback(view: View) { openFragment(InfoFragment(), "feedback") }
+    fun refund(view: View) { openFragment(InfoFragment(), "refund") }
+    fun subscriptioncontrol(view: View) { openFragment(InfoFragment(), "subscription_control") }
+    fun premiumsearch(view: View) { openFragment(PremiumFragment()) }
+    fun mainsearch(view: View) { openFragment(MainFragment()) }
     // <-               -> //
 
+    private fun openFragment(fragment: Fragment, str: String = ""){
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+        drawerLayout.closeDrawer(GravityCompat.START)
+        infofragment = str
+    }
     // <- Кнопки в диалоге -> //
     fun closeDialog(view: View) { dialogChoose.dismiss() }          // button for close dialog
     fun chooseImageDialog(view: View) { openGalleryForImage() }             // button for choose photo from the gallery

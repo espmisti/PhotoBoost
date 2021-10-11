@@ -1,4 +1,4 @@
-package com.koshkatolik.photoboost
+package com.koshkatolik.photoboost.fragments.main
 
 import android.app.DownloadManager
 import android.content.SharedPreferences
@@ -21,6 +21,9 @@ import kotlinx.android.synthetic.main.activity_photo_web_view.webview_button_pre
 import kotlinx.android.synthetic.main.activity_photo_web_view.webview_button_yandex
 import kotlinx.android.synthetic.main.fragment_web_view.view.*
 import android.webkit.WebView
+import com.koshkatolik.photoboost.MainActivity
+import com.koshkatolik.photoboost.MyWebViewClient
+import com.koshkatolik.photoboost.R
 
 
 class WebViewFragment : Fragment() {

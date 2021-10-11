@@ -4,9 +4,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.koshkatolik.photoboost.fragments.FirstSlideFragment
-import com.koshkatolik.photoboost.fragments.SecondSlideFragment
-import com.koshkatolik.photoboost.fragments.ThirdSlideFragment
+import com.koshkatolik.photoboost.fragments.sliders.FirstSlideFragment
+import com.koshkatolik.photoboost.fragments.sliders.SecondSlideFragment
+import com.koshkatolik.photoboost.fragments.sliders.ThirdSlideFragment
 
 class PagerAdapter(fmManager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fmManager, lifecycle) {
     var fragments:ArrayList<Fragment> = arrayListOf(FirstSlideFragment(), SecondSlideFragment(), ThirdSlideFragment())

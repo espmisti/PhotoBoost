@@ -1,4 +1,4 @@
-package com.koshkatolik.photoboost
+package com.koshkatolik.photoboost.fragments.main
 
 import android.app.DownloadManager
 import android.content.pm.ApplicationInfo
@@ -17,6 +17,8 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.koshkatolik.photoboost.MyWebViewClient
+import com.koshkatolik.photoboost.R
 import kotlinx.android.synthetic.main.activity_photo_web_view.*
 
 class UserWebViewFragment : Fragment() {

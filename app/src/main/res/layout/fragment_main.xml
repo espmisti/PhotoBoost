@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ic_background_main"
-    tools:context=".MainFragment">
+    tools:context=".fragments.main.MainFragment">
 
     <Button
         android:id="@+id/m_button_choose_tariff"
