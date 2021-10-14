@@ -5,12 +5,12 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_second"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <FrameLayout
             android:id="@+id/fragment_container"
@@ -64,7 +64,7 @@
             android:background="@color/white"
             android:backgroundTint="#E63244"
             android:baselineAlignBottom="false"
-            android:src="@drawable/ic_plus"
+            android:src="@drawable/circle"
             app:borderWidth="0dp"
             app:elevation="0dp"
             app:layout_anchor="@id/bottomAppBar" />

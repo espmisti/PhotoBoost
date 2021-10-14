@@ -56,7 +56,7 @@
                 android:id="@+id/radioButton8"
                 android:layout_width="135dp"
                 android:layout_height="62dp"
-                android:background="@drawable/radiobutton_custom"
+                android:background="@drawable/ic_premium"
                 android:checked="false" />
 
             <RadioButton
@@ -64,7 +64,7 @@
                 android:layout_width="135dp"
                 android:layout_height="62dp"
                 android:layout_marginLeft="15dp"
-                android:background="@drawable/radiobutton_custom" />
+                android:background="@drawable/ic_premium" />
         </TableRow>
 
         <TableRow
@@ -75,7 +75,7 @@
                 android:id="@+id/radioButton9"
                 android:layout_width="135dp"
                 android:layout_height="62dp"
-                android:background="@drawable/radiobutton_custom"
+                android:background="@drawable/ic_premium"
                 tools:layout_editor_absoluteX="244dp"
                 tools:layout_editor_absoluteY="423dp" />
 
@@ -84,7 +84,7 @@
                 android:layout_width="135dp"
                 android:layout_height="62dp"
                 android:layout_marginLeft="15dp"
-                android:background="@drawable/radiobutton_custom" />
+                android:background="@drawable/ic_premium" />
         </TableRow>
 
     </TableLayout>

@@ -9,6 +9,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.util.Log
 import android.view.View
 import android.webkit.CookieManager
 import android.webkit.DownloadListener
@@ -26,6 +27,7 @@ class PhotoWebViewActivity : AppCompatActivity() {
         setContentView(R.layout.activity_photo_web_view)
 
         var uriImage = intent.getStringExtra("uri")
+        Log.i("webvieiwiew", "onCreate: $uriImage")
         // yandex search = https://yandex.ru/images/search?rpt=imageview&url=http://copp63.ru/images/promo.svg?2232323
 
         shared = getSharedPreferences("APP", MODE_PRIVATE)

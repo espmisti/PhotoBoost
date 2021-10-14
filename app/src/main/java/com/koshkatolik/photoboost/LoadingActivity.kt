@@ -20,9 +20,8 @@ import com.koshkatolik.photoboost.subscriptions.BillingSubscribe
 
 
 class LoadingActivity : AppCompatActivity() {
-    private val TAG = "Permissions"
-    var bp: BillingSubscribe = BillingSubscribe()
-    var purchaseTransactionDetails: TransactionDetails? = null
+    private val TAG = "LOADING"
+    var billing = BillingSubscribe()
     var REQUEST_CODE_ASK_PERMISSIONS = 1
     lateinit var sharedSetting: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,14 +38,7 @@ class LoadingActivity : AppCompatActivity() {
             Log.e("Billing", "Loading (LoadingActivity): Устройство не поддерживает Google Play")
             finish()
         } else {
-            bp.initialization(this)
-            purchaseTransactionDetails = bp.billing?.getSubscriptionTransactionDetails("leonid")
-            bp.billing?.loadOwnedPurchasesFromGoogle()
-            if(bp.isHasSub()){
-                Log.i("sub_billing", "У пользователя есть подписка!")
-            } else {
-                Log.i("sub_billing", "У пользователя нет подписки!")
-            }
+            billing.initialization(this)
             if(!sharedSetting.getBoolean("hasLaunch", false)){
                 Handler().postDelayed({ if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) { requestPerms() } }, 2000)
             } else {

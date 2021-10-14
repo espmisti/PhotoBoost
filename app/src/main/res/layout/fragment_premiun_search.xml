@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_second"
+    android:background="@drawable/ic_background_3"
     tools:context=".fragments.main.PremiumSearchFragment">
 
 
@@ -65,7 +65,7 @@
         android:id="@+id/btn_update_list"
         android:layout_width="52dp"
         android:layout_height="52dp"
-        android:background="@drawable/ic_update_red"
+        android:background="@drawable/ic_premium"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

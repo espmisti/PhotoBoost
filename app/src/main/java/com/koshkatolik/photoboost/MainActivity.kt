@@ -1,7 +1,5 @@
 package com.koshkatolik.photoboost
 
-//import com.android.billingclient.api.BillingClient
-//import com.android.billingclient.api.PurchasesUpdatedListener
 import android.app.Activity
 import android.app.Dialog
 import android.content.ActivityNotFoundException
@@ -61,7 +59,7 @@ class MainActivity : AppCompatActivity(), Communicator {
 
     private val SERVER_IP = "z96082yn.beget.tech"
     private val SERVER_USERNAME = "z96082yn"
-    private val SERVER_PASSWORD = "XTYSDbPI"
+    private val SERVER_PASSWORD = "q1w2e3r4t5y6u7"
 
     private val SERVER_DIR = "z96082yn.beget.tech/public_html"
 

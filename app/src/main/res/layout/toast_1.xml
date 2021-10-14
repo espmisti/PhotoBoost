@@ -12,8 +12,11 @@
         android:layout_width="fill_parent"
         android:layout_height="30dp"
         android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"
-        app:srcCompat="@drawable/toast_bg" /><![CDATA[
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:srcCompat="@drawable/ic_premium" /><![CDATA[
 
     ImageView
     android:id="@+id/closeToast"

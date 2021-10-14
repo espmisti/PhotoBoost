@@ -12,4 +12,5 @@
     <color name="button">#5266B9</color>
     <color name="bg_menu">#3D3D3D</color>
     <color name="bg_menu_2">#DEE5FF</color>
+    <color name="red">#FF7676</color>
 </resources>
