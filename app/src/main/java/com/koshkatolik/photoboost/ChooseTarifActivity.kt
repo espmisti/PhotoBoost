@@ -2,12 +2,8 @@ package com.koshkatolik.photoboost
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.core.content.ContextCompat
-import com.anjlab.android.iab.v3.TransactionDetails
-import com.koshkatolik.photoboost.fragments.main.MainFragment
 import com.koshkatolik.photoboost.subscriptions.BillingSubscribe
 import kotlinx.android.synthetic.main.activity_choose_tarif.*
 
@@ -22,7 +18,7 @@ class ChooseTarifActivity : AppCompatActivity() {
         window.navigationBarColor = ContextCompat.getColor(this, R.color.white)
         billing.initialization(this)
         sub_firstTarif.setOnClickListener{
-
+            billing.billing?.subscribe(this, "first")
         }
         sub_secondTarif.setOnClickListener {
             billing.billing?.subscribe(this, "second")

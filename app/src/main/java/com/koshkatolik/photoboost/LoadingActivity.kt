@@ -19,9 +19,9 @@ import com.anjlab.android.iab.v3.TransactionDetails
 import com.koshkatolik.photoboost.subscriptions.BillingSubscribe
 
 
-class LoadingActivity : AppCompatActivity() {
+class LoadingActivity : AppCompatActivity(), BillingProcessor.IBillingHandler{
     private val TAG = "LOADING"
-    var billing = BillingSubscribe()
+    var billing: BillingProcessor? = null
     var REQUEST_CODE_ASK_PERMISSIONS = 1
     lateinit var sharedSetting: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +31,7 @@ class LoadingActivity : AppCompatActivity() {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.statusBarColor = this.resources.getColor(R.color.white)
         window.navigationBarColor = ContextCompat.getColor(this, R.color.white)
+        ini()
         sharedSetting = getSharedPreferences("settings", Context.MODE_PRIVATE)
         val isAvailable = BillingProcessor.isIabServiceAvailable(this)
         if(!isAvailable){
@@ -38,7 +39,7 @@ class LoadingActivity : AppCompatActivity() {
             Log.e("Billing", "Loading (LoadingActivity): Устройство не поддерживает Google Play")
             finish()
         } else {
-            billing.initialization(this)
+
             if(!sharedSetting.getBoolean("hasLaunch", false)){
                 Handler().postDelayed({ if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) { requestPerms() } }, 2000)
             } else {
@@ -74,5 +75,46 @@ class LoadingActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ActivityCompat.requestPermissions(this, perm, REQUEST_CODE_ASK_PERMISSIONS)
         }
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (!billing?.handleActivityResult(requestCode, resultCode, data)!!) {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
+    override fun onProductPurchased(productId: String, details: TransactionDetails?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPurchaseHistoryRestored() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onBillingError(errorCode: Int, error: Throwable?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onBillingInitialized() {
+        billing?.loadOwnedPurchasesFromGoogle()
+        if(isHasSubscribe(billing, "first"))
+            Log.i(TAG, "Подписка есть на first")
+        else
+            Log.i(TAG, "Подписки нету на first")
+        if(isHasSubscribe(billing, "second"))
+            Log.i(TAG, "Подписка есть на second")
+        else
+            Log.i(TAG, "Подписки нету на second")
+    }
+
+    private fun ini(){
+        billing = BillingProcessor.newBillingProcessor(this, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwBC57v3qXmsv08YmJciB877BMKUvOzcr8Rnm2wgZMSESf0g8rg4d9tSbarBOPTbwh/entIvH2B0X0IubpyFxDHe4BoD/2aZsicLh0v7xt5pYvwuj+/lAkmi1ZaN1i4tfTLOkOWOD7aFRgAaegEi/endM/VQn8/1GyhTNP4spr2nVNEC6A7bOfGdE66HIwzlBzLOZNd0MlG8ILTZYekCOfKiBcaZC+CBxvrbOHtf/7zTIVaATVT9bWTQuNWfix3kGwhurKQGmNkGYDIyMfhjeykY3BOKXxCqJ07mTWyc3GrUOSB9duyEDMRtwe27M+5dGJP7YXqicXBeRXQY9htqLtwIDAQAB", this)
+        billing?.initialize()
+    }
+
+    private fun isHasSubscribe(billingProcessor: BillingProcessor?, productId: String): Boolean {
+        if(billingProcessor?.getSubscriptionTransactionDetails(productId) != null){
+            return (billingProcessor.getSubscriptionTransactionDetails(productId))?.purchaseInfo != null
+        }
+        return false
     }
 }
