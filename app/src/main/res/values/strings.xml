@@ -10,4 +10,26 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="version">0.1</string>
     <string name="licenseKey">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwBC57v3qXmsv08YmJciB877BMKUvOzcr8Rnm2wgZMSESf0g8rg4d9tSbarBOPTbwh/entIvH2B0X0IubpyFxDHe4BoD/2aZsicLh0v7xt5pYvwuj+/lAkmi1ZaN1i4tfTLOkOWOD7aFRgAaegEi/endM/VQn8/1GyhTNP4spr2nVNEC6A7bOfGdE66HIwzlBzLOZNd0MlG8ILTZYekCOfKiBcaZC+CBxvrbOHtf/7zTIVaATVT9bWTQuNWfix3kGwhurKQGmNkGYDIyMfhjeykY3BOKXxCqJ07mTWyc3GrUOSB9duyEDMRtwe27M+5dGJP7YXqicXBeRXQY9htqLtwIDAQAB</string>
+
+    <!--  Alerts -->
+    <string-array name="alert_error_google">
+        <item>Мы сожалеем!</item>
+        <item>К сожалению на Вашем устройстве не поддерживается или не установлен Google Play.</item>
+        <item>Закрыть</item>
+    </string-array>
+    <string-array name="alert_error_permission">
+        <item>Упс!</item>
+        <item>Для работы приложения нам нужен доступ, по каким то причинам разрешение пропало :(</item>
+        <item>Разрешить</item>
+    </string-array>
+    <string-array name="alert_error_first_permission">
+        <item>Разрешение</item>
+        <item>Чтобы приложение работало правильно нам нужно разрешение.</item>
+        <item>Предоставить</item>
+    </string-array>
+    <string-array name="alert_error_internet">
+        <item>404 :(</item>
+        <item>У Вас выключен интернет, для работы с приложением нужно подключение</item>
+        <item>Закрыть</item>
+    </string-array>
 </resources>
